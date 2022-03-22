@@ -1,16 +1,14 @@
 ; A simple boot sector
-	mov ax, 0x002a
-	mov ebx, 0xb8000
 
-; total cells in standard VGA = 80 x 50 = 0x0fa0 
-	mov ecx, 0x0fa0
-	
-; displays '*' with all possible combinations of bg and fg colors
-vga_boot_test:
-	mov word [ebx], ax
-	add ebx, 0x02
-	inc ah
-	loop vga_boot_test
+; 'X' marks the spot program
+	mov bx, var
+	add bx, 0x7c00
+	mov al, byte [bx]
+	mov ah, 0x0e
+	int 0x10
+
+var:
+	db "X"
 
 ; zero padding
 	times 510 - ($ - $$) db 0
