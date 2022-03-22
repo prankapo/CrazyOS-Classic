@@ -1,14 +1,13 @@
 ; A simple boot sector
+[org 0x7c00]
 
 ; 'X' marks the spot program
-	mov bx, var
-	add bx, 0x7c00
-	mov al, byte [bx]
+	mov al, byte [var]
 	mov ah, 0x0e
 	int 0x10
 
 var:
-	db "X"
+	db 'x'
 
 ; zero padding
 	times 510 - ($ - $$) db 0
