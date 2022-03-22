@@ -1,8 +1,10 @@
 ; A simple boot sector
 	mov ax, 0x002a
 	mov ebx, 0xb8000
-	mov ecx, 0x0100
 
+; total cells in standard VGA = 80 x 50 = 0x0fa0 
+	mov ecx, 0x0fa0
+	
 ; displays '*' with all possible combinations of bg and fg colors
 vga_boot_test:
 	mov word [ebx], ax
