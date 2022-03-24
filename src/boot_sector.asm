@@ -38,6 +38,8 @@ boot:
 	call printnl
 	mov si, string2
 	call print
+	mov dx, 0x12F4
+	call printhex
 
 string1:
 	db "Hello world", 0x00
