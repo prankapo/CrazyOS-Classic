@@ -1,6 +1,11 @@
 ; A simple boot sector
 ; Memory address where the first sector of the disk is loaded
 org 0x7c00
+jmp boot
+
+%include "print.asm"
+
+boot: 
 
 ; initialise bottom of the stack and stack pointer
 	mov bp, 0x8000
@@ -28,14 +33,16 @@ org 0x7c00
 	int 0x10
 
 ; print string 
-	mov bx, string
+	mov si, string1
+	call print
+	call printnl
+	mov si, string2
 	call print
 
-string:
+string1:
 	db "Hello world", 0x00
-
-%include "print.asm"
-
+string2: 
+	db "BOOTING...", 0x00
 ; zero padding
 	times 510 - ($ - $$) db 0
 
