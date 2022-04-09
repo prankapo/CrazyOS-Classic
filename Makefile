@@ -15,3 +15,6 @@ obj/kernel_entry.o: src/boot/kernel_entry.asm
 
 obj/kernel.o: src/kernel/kernel.c
 	gcc -m32 -fno-pie -c $< -o $@
+
+clean: $(wildcard bin/*.bin) $(wildcard obj/*.o)
+	rm $^

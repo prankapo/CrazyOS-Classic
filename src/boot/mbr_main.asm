@@ -93,13 +93,13 @@ read_disk:			; load sectors from disk 0
 .disk_error:			; print disk error code
 	mov si, DISK_ERROR
 	call print
-	mov ah, 0x01		; status of disk after last operation
-	int 0x13
-	mov dx, 0x0000
-	mov dl, al
-	call printhex
-	call printnl
-	jmp $			; stop operation
+	;mov ah, 0x01		; status of disk after last operation
+	;int 0x13
+	;mov dx, 0x0000
+	;mov dl, al
+	;call printhex
+	;call printnl
+	;jmp $			; stop operation
 
 .no_error:
 	mov si, BOOT_MSG2
@@ -118,7 +118,7 @@ switch_32:
 	mov eax, cr0
 	or eax, 0x01		; enable protected mode
 	mov cr0, eax
-	jmp CODE_SEG:init_32bit	; far jump to code segment flushes the CPU queue of
+	jmp init_32bit		; far jump to code segment flushes the CPU queue of
 				; any 16 bit instructions
 
 [bits 32]
@@ -145,7 +145,7 @@ init_32bit:
 	DISK_ERROR db "DISK ERROR: ", 0x00
 	BOOT_MSG2 db "DISK READ SUCCESSFUL!! KERNEL LOADED AT ", 0x00
 	BOOT_MSG3 db "RETURNED TO BOOTLOADER", 0x00
-	KERNEL_OFFSET equ 0x1000
+	KERNEL_OFFSET dw 0x1000
 	DRIVE_NUMBER db 0x00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
