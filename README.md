@@ -10,6 +10,6 @@ I am aiming at making this operating system work on:
 4. ARM (Raspberry Pi)  
 5. RISC-V  
   
-Much of the testing would be done on emulators like Qemu. For emulating IBM PC I am thinking of using _PCem_.  
+Much of the testing would be done on emulators like Qemu. For emulating IBM PC, I am using _PCem v17_. If you will download it from the official webpage and try to run it, you will see an error message will come up and say "No ROMs present!". I was able to fix this by following [a video on YouTube](https://youtu.be/dOD1wwtfrjY). To spare others of going through this trouble of copy-pasting stuff, I have uploaded the whole PCem deal I am using. Just download that folder and you would be good to go.  
 Finally, I would absolutely love it if someone teaches me a thing or two. So feel free to test and criticize this operating system and talk about it!
 That's about it!!
