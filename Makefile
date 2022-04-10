@@ -1,20 +1,43 @@
+####################################################################################
+# Qemu
+####################################################################################
 run: iso/CrazyOS.iso
-	qemu-system-x86_64 -m 128M -usb iso/CrazyOS.iso 
+	qemu-system-x86_64 -bios OVMF.fd -boot iso/CrazyOS.iso 
 
-iso/CrazyOS.iso: bin/mbr.bin obj/kernel_entry.o obj/kernel.o
-	objcopy -O binary -j .text obj/kernel_entry.o bin/kernel_entry.bin
-	objcopy -O binary -j .text obj/kernel.o bin/kernel.bin
-	python bin/diskmaker.py
-	yes y|piso convert bin/CrazyOS.bin -o iso/CrazyOS.iso
+####################################################################################
+# MAIN
+####################################################################################
+iso: bin/mbr.bin bin/kernel.bin
+	cat $^ > bin/CrazyOS.bin
+	iat bin/CrazyOS.bin iso/CrazyOS.iso
+
+bin/kernel.bin: obj/kernel_entry.o obj/kernel.o
+	x86_64-elf-ld -n -o $@ -T linker.ld $^ --oformat binary
 
 bin/mbr.bin: $(wildcard src/boot/*.asm)
-	nasm -f bin -I src/boot/ src/boot/mbr_main.asm -o bin/mbr.bin
+	nasm -I src/boot/ src/boot/mbr_main.asm -o $@
 
 obj/kernel_entry.o: src/boot/kernel_entry.asm
-	nasm $< -f elf32 -o $@
+	nasm $< -f elf64 -o $@
 
 obj/kernel.o: src/kernel/kernel.c
-	gcc -m32 -fno-pie -c $< -o $@
+	x86_64-elf-gcc -c -ffreestanding $< -o $@
 
+####################################################################################
+# Comands for managing build environment
+####################################################################################
+doc_dep: buildenv/Dockerfile
+	docker build buildenv -t crazyos_buildenv
+
+doc_run: 
+	docker run --rm -it -v "C:\Data Centre\Projects\CrazyOS\CrazyOS":/root/env crazyos_buildenv
+
+doc_del: 
+	docker stop crazyos_buildenv
+	docker rm crazyos_buildenv
+
+####################################################################################
+# Clean binaries and object files. Do before "gitting"
+####################################################################################
 clean: $(wildcard bin/*.bin) $(wildcard obj/*.o)
 	rm $^

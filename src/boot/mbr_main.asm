@@ -1,5 +1,5 @@
 ;BOOTLOADER CODE
-
+section .boot
 [bits 16]			; Use 16-bit instructions
 [org 0x7c00]			; Memory address where the first sector of
 				; the disk is loaded
@@ -38,7 +38,7 @@ gdt_data:			; data segment descriptor
 gdt_end:
 
 				; GDT Descriptor
-gdt_descriptor:
+gdt_pointer:
 	dw gdt_end - gdt_start - 1
 	dd gdt_start
 
@@ -112,16 +112,16 @@ read_disk:			; load sectors from disk 0
 ; SWITCH TO 32-BIT PROTECTED MODE
 ; copied from "dev.to/frosnerd/writing-my-own-boot-loader-3mld"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[bits 32]
 switch_32:
 	cli			; disable interrupts
-	lgdt [gdt_descriptor]	; load GDT address into GDTR register
+	lgdt [gdt_pointer]	; load GDT address into GDTR register
 	mov eax, cr0
 	or eax, 0x01		; enable protected mode
 	mov cr0, eax
 	jmp init_32bit		; far jump to code segment flushes the CPU queue of
 				; any 16 bit instructions
 
-[bits 32]
 init_32bit:
 	mov ax, DATA_SEG	; update segment registers
 	mov ds, ax		; load ds with the segment address
@@ -132,11 +132,11 @@ init_32bit:
 
 	mov ebp, 0x90000	; setup a new stack frame
 	mov esp, ebp
-	call KERNEL_OFFSET
+	call 0x1000
 	mov si, BOOT_MSG3
 	call print
 	call printnl
-	jmp $
+	jmp init_32bit
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; VARIABLES AND CONSTANTS
