@@ -1,1 +1,0 @@
-void superxt_init();

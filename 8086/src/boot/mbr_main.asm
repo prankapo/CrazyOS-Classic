@@ -9,43 +9,6 @@ section .boot
 %include "mbr_print.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; GLOBAL DESCRIPTOR TABLE
-; inspired from "dev.to/frosnerd/writing-my-own-boot-loader-3mld"
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-gdt_start:
-	dq 0x00			; null segment descriptor
-				; if we try to load null segment,
-				; general protection exception occurs.
-
-gdt_code:			; code segment descriptor
-	dw 0xffff		; segment limit set to max [15:0]
-	dw 0x0000		; base address = 0x0000 [15:0]
-
-	db 0x00			; base address [23:16]
-	db 10011010b		; [P|DPL|1|TYPE]
-	db 11011111b		; [BASE[31:24]|G|D|0|AVL|LIM[19:16]]
-	db 0x00			; base address [31:24]
-
-gdt_data:			; data segment descriptor
-	dw 0xffff		; segment limit set to max [15:0]
-	dw 0x0000		; base address = 0x0000 [15:0]
-
-	db 0x00			; base address [23:16]
-	db 10010010b		; [P|DPL|1|TYPE]
-	db 11011111b		; [BASE[31:24]|G|D|0|AVL|LIM[19:16]]
-	db 0x00			; base address [31:24]
-
-gdt_end:
-
-				; GDT Descriptor
-gdt_pointer:
-	dw gdt_end - gdt_start - 1
-	dd gdt_start
-
-	CODE_SEG equ gdt_code - gdt_start
-	DATA_SEG equ gdt_data - gdt_start
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BOOT_MAIN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 boot_main: 
@@ -77,6 +40,9 @@ boot_main:
 	call print
 	call printnl
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; READ DISK, LOAD KERNEL
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 read_disk:			; load sectors from disk 0
 	mov ah, 0x02		; read from the disk
 	mov al, 0x02		; number of sectors to read
@@ -107,36 +73,6 @@ read_disk:			; load sectors from disk 0
 	mov dx, [KERNEL_OFFSET]
 	call printhex
 	call printnl
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; SWITCH TO 32-BIT PROTECTED MODE
-; copied from "dev.to/frosnerd/writing-my-own-boot-loader-3mld"
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[bits 32]
-switch_32:
-	cli			; disable interrupts
-	lgdt [gdt_pointer]	; load GDT address into GDTR register
-	mov eax, cr0
-	or eax, 0x01		; enable protected mode
-	mov cr0, eax
-	jmp init_32bit		; far jump to code segment flushes the CPU queue of
-				; any 16 bit instructions
-
-init_32bit:
-	mov ax, DATA_SEG	; update segment registers
-	mov ds, ax		; load ds with the segment address
-	mov ss, ax		; load ss with stack address
-	mov es, ax
-	mov fs, ax
-	mov gs, ax
-
-	mov ebp, 0x90000	; setup a new stack frame
-	mov esp, ebp
-	call 0x1000
-	mov si, BOOT_MSG3
-	call print
-	call printnl
-	jmp init_32bit
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; VARIABLES AND CONSTANTS
