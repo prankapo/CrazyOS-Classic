@@ -49,7 +49,6 @@ printhex:
 	mov si, .hex_num
 	call print
 	ret
-
 .hex_num:
 	db "0x0000", 0x00
 

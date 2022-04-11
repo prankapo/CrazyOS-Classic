@@ -1,27 +1,23 @@
 ####################################################################################
 # Qemu
 ####################################################################################
-run: iso/CrazyOS.iso
-	qemu-system-x86_64 -bios OVMF.fd -boot iso/CrazyOS.iso 
+run: img/CrazyOS.img
+	qemu-system-x86_64 img/CrazyOS.img 
 
 ####################################################################################
 # MAIN
 ####################################################################################
-iso: bin/mbr.bin bin/kernel.bin
-	cat $^ > bin/CrazyOS.bin
-	iat bin/CrazyOS.bin iso/CrazyOS.iso
+img: bin/boot.bin bin/kernel.bin
+	cat $^ > img/CrazyOS.img
 
-bin/kernel.bin: obj/kernel_entry.o obj/kernel.o
-	x86_64-elf-ld -n -o $@ -T linker.ld $^ --oformat binary
+bin/kernel.bin: obj/kernel.o linker.ld
+	ld -n -o $@ -T linker.ld $^ --oformat binary
 
-bin/mbr.bin: $(wildcard src/boot/*.asm)
+bin/boot.bin: $(wildcard src/boot/*.asm)
 	nasm -I src/boot/ src/boot/mbr_main.asm -o $@
 
-obj/kernel_entry.o: src/boot/kernel_entry.asm
+obj/kernel.o: src/kernel/kernel.asm
 	nasm $< -f elf64 -o $@
-
-obj/kernel.o: src/kernel/kernel.c
-	x86_64-elf-gcc -c -ffreestanding $< -o $@
 
 ####################################################################################
 # Comands for managing build environment
@@ -30,7 +26,7 @@ doc_dep: buildenv/Dockerfile
 	docker build buildenv -t crazyos_buildenv
 
 doc_run: 
-	docker run --rm -it -v "C:\Data Centre\Projects\CrazyOS\CrazyOS":/root/env crazyos_buildenv
+	docker run --rm -it -v "C:\Data Centre\Projects\CrazyOS\8086":/root/env crazyos_buildenv
 
 doc_del: 
 	docker stop crazyos_buildenv
