@@ -1,23 +1,32 @@
 ####################################################################################
 # Qemu
 ####################################################################################
-run: img/CrazyOS.img
-	qemu-system-x86_64 img/CrazyOS.img 
+run: CrazyOS.img
+	qemu-system-i386 -m 1 -k en-us -rtc base=localtime\
+		-device sb16\
+		-device adlib\
+		-device cirrus-vga\
+		-fda CrazyOS.img -boot order=a 
 
 ####################################################################################
 # MAIN
 ####################################################################################
-img: bin/boot.bin bin/kernel.bin
-	cat $^ > img/CrazyOS.img
+all: CrazyOS.img
 
-bin/kernel.bin: obj/kernel.o linker.ld
-	ld -n -o $@ -T linker.ld $^ --oformat binary
+CrazyOS.img: boot.bin kernel.bin
+	cat $^ > $@
 
-bin/boot.bin: $(wildcard src/boot/*.asm)
-	nasm -I src/boot/ src/boot/mbr_main.asm -o $@
+boot.bin: boot.o
+	ld -melf_i386 -n -o $@ -T boot.ld $^ --oformat binary
 
-obj/kernel.o: src/kernel/kernel.asm
-	nasm $< -f elf64 -o $@
+boot.o: $(wildcard boot/*.asm)
+	nasm -I boot/ boot/boot.asm -f elf32 -o $@
+
+kernel.bin: kernel.o linker.ld
+	ld -melf_i386 -n -o $@ -T linker.ld $^ --oformat binary
+
+kernel.o: kernel/kernel.asm
+	nasm $< -f elf32 -o $@
 
 ####################################################################################
 # Comands for managing build environment
@@ -35,5 +44,5 @@ doc_del:
 ####################################################################################
 # Clean binaries and object files. Do before "gitting"
 ####################################################################################
-clean: $(wildcard bin/*.bin) $(wildcard obj/*.o)
+clean: $(wildcard *.bin) $(wildcard *.o) CrazyOS.img
 	rm $^

@@ -3,15 +3,12 @@
 ; AUTHOR: PRANEET KAPOOR
 ; DATE: 11.04.2022 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-SECTION .boot
-;CPU 8086			; Use ONLY 8086 instructions
-BITS 16
-ORG 0x7c00			; Memory address where the first sector of
-				; the disk is loaded
+section .boot
+bits 16
 
 	jmp boot_main		; main code of bootloader resides here
 
-%include "mbr_print.asm"
+%include "boot_util.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BOOT_MAIN
@@ -100,6 +97,17 @@ read_disk:
 .no_error:
 	mov si, BOOT_MSG2
 	call print
+	call printnl
+	mov si, BOOT_MSG3
+	call print
+	mov dx, word [KERNEL_BASE]
+	call printhex
+	call printnl
+	mov si, BOOT_MSG4
+	call print
+	mov dx, word [KERNEL_OFFSET]
+	call printhex
+	call printnl
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,6 +116,8 @@ read_disk:
 	BOOT_MSG1 db "BOOTING ...", 0x00
 	DISK_ERROR db "DISK ERROR: ", 0x00
 	BOOT_MSG2 db "DISK READ SUCCESSFUL!! KERNEL LOADED!!", 0x00
+	BOOT_MSG3 db "KERNEL BASE ADDRESS: ", 0x00
+	BOOT_MSG4 db "KERNEL OFFSET ADDRESS: ", 0x00
 	KERNEL_BASE dw 0x1000
 	KERNEL_OFFSET dw 0x0000
 	DRIVE_NUMBER db 0x00
