@@ -10,7 +10,11 @@ I am aiming at making this operating system work on:
 4. ARM (Raspberry Pi)  
 5. RISC-V  
   
+<<<<<<< HEAD
 Much of the testing would be done on emulators like Qemu.   
+=======
+Much of the testing would be done on emulators like Qemu.   
+>>>>>>> d8450ff4cc6d7d53995c11b2e255d696ccd1a192
 __NOTE: PCem is no longer being used for testing. I have tried two approaches to print hex-numbers using Amstrad PC emulators provided over there. None of them worked and time was wasted. On the other hand, both subroutines (for printing hex) work just fine in Qemu. Probably in future I will use PCem again, but at present, NO!!__ 
 Finally, I would absolutely love it if someone teaches me a thing or two. So feel free to test and criticize this operating system and talk about it!
 That's about it!!
