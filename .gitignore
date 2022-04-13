@@ -1,0 +1,13 @@
+# files to ignore
+*~
+*.swp
+*.o
+*.elf
+*.bin
+*.hex
+*.img
+
+# folders to ignore
+cos/
+Documentation/build/
+Documentation/source/_templates/
