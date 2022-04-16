@@ -1,20 +1,15 @@
-.. CrazyOS documentation master file, created by
-   sphinx-quickstart on Wed Apr 13 09:50:12 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+CrazyOS Documentation
+=====================
 
-Welcome to CrazyOS's documentation!
-===================================
+This is the documentation for CrazyOS.
+
+The OS is targetted at various architectures. Say, you wish to know about the variant of CrazyOS which runs on i386. Then jump ahead to CrazyOS - i386. Simple!
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   introduction
+   coding_style
+   8086/index
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

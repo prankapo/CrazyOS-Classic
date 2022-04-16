@@ -6,6 +6,7 @@
 *.bin
 *.hex
 *.img
+*.exe
 
 # folders to ignore
 cos/
