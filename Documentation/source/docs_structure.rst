@@ -1,8 +1,8 @@
 Structure of this documentation 
 ===============================
 
-Praneet Kapoor (16.04.2022)
----------------------------
+*by Praneet Kapoor (16.04.2022)*
+
 
 This the biggest project that I have ever attempted. This is clear from the number and types of commits I have made to the project. Naturally, this documentation much like the project would be scattered all over the place, but we hope that with time all of this will evolve into something beautiful. 
 
