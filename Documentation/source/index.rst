@@ -10,6 +10,7 @@ The OS is targetted at various architectures. Say, you wish to know about the va
    :caption: Contents:
 
    introduction
+   docs_structure
    coding_style
    8086/index
 
