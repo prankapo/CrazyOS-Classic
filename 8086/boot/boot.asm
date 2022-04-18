@@ -27,7 +27,12 @@ boot_main:
 
 	mov dx, 0x02		; number of sectors to read
 	call read_disk
-	jmp 0x1000:0
+	mov bx, word [KERNEL_BASE]
+	mov es, bx
+	mov bx, word [KERNEL_OFFSET]
+	push es
+	push bx
+	retf
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; CLEAR SCREEN
