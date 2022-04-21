@@ -42,30 +42,84 @@ kernel_main:
 	call print
 	call printnl
 	
-	mov si, word [MSGCS]
+	mov si, MSGCS
 	call print
 	mov dx, cs
 	call printhex
 	call printnl
 	
-	mov si, word [MSGSS]
+	mov si, MSGSS
 	call print
 	mov dx, ss
 	call printhex
 	call printnl
 
-	mov si, word [MSGBP]
+	mov si, MSGBP
 	call print
 	mov dx, bp
 	call printhex
 	call printnl
-	
-	call func
-	jmp $
-func: 
-	mov si, word [MSGSP]
-	call print
-	mov dx, sp
+
+.1:
+	call hours
+	call minutes
+	call seconds
+	jmp .1
+
+hours:
+	cli
+	mov al, 0x04		; access register 0x00 in CMOS for seconds
+	out 0x70, al
+	mov ax, 0x00
+	nop			; wait...
+	in al, 0x71
+	push ax
+	sti
+	mov ah, 0x02		; function code for setting cursor position
+	mov bh, 0x00		; page number
+	mov dh, 23d		; row number
+	mov dl, 57d		; column number
+	int 0x10
+	pop dx
+	call printhex
+	call printnl
+	ret
+
+
+minutes:
+	cli
+	mov al, 0x02		; access register 0x00 in CMOS for seconds
+	out 0x70, al
+	mov ax, 0x00
+	nop			; wait...
+	in al, 0x71
+	push ax
+	sti
+	mov ah, 0x02		; function code for setting cursor position
+	mov bh, 0x00		; page number
+	mov dh, 23d		; row number
+	mov dl, 64d		; column number
+	int 0x10
+	pop dx
+	call printhex
+	call printnl
+	ret
+
+seconds:
+	cli
+	mov al, 0x00		; access register 0x00 in CMOS for seconds
+	out 0x70, al
+	mov ax, 0x00
+	nop			; wait...
+	in al, 0x71
+	push ax
+	sti
+	mov ah, 0x02		; function code for setting cursor position
+	mov bh, 0x00		; page number
+	mov dh, 23d		; row number
+	mov dl, 71d		; column number
+	int 0x10
+	pop dx
 	call printhex
 	call printnl
 	ret
@@ -123,7 +177,7 @@ printnl:
 	ret	
 
 section .data
-	MSG1 db "Hello world", 0x00
+	MSG1 db "Hello world from kernel", 0x00
 	MSGCS db "CS = ", 0x00
 	MSGSS db "SS = ", 0x00
 	MSGBP db "BP = ", 0x00

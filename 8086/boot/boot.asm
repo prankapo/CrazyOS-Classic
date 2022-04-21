@@ -52,7 +52,7 @@ clrscr:
 ; RESET CURSOR POSITION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 reset_curse:
-	mov ah, 0x02		; function code for setting page number
+	mov ah, 0x02		; function code for setting cursor position
 	mov bh, 0x00		; page number
 	mov dh, 0x00		; row number
 	mov dl, 0x00		; column number
