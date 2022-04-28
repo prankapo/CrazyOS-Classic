@@ -76,7 +76,7 @@ read_disk:
 	mov ah, 0x02		; read from the disk
 	mov al, dl		; number of sectors to read
 	mov ch, 0x00		; cylinder 0
-	mov cl, 0x02		; sector 2, because sector 1 is MBR
+	mov cl, 0x03		; sector 3, because sector 1 is MBR
 	mov dh, 0x00		; head 0
 	mov dl, [DRIVE_NUMBER]	; drive number
 	mov bx, [KERNEL_BASE]	; Segment base address for kernel
@@ -131,7 +131,7 @@ read_disk:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ZERO PADDING AND MAGIC NUMBER
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	times 483 - ($ - $$) db 0	
+	times 510 - ($ - $$) db 0	
 	dw 0xaa55		; magic number
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
