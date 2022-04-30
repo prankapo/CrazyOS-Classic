@@ -29,27 +29,29 @@ int main(int argc, char ** argv)
 	
 	while (1) {
 		if (fread(fv1.ptr, 1, 1, fv1.src) == 1) {
-			fprintf(stdout, 
-				"%d -> %d : %02x\n", 
-				ftell(fv1.src), ftell(fv1.dst), fv1.byte);
-			
-			fwrite(&fv1.byte, 1, 1, fv1.dst);		}
+			fwrite(&fv1.byte, 1, 1, fv1.dst);		
+		}
 		else {
 			if (fv1.fileindex < fv1.totalfiles) {
+				fprintf(stdout, 
+					"%d -> %d : %02x\n", 
+					ftell(fv1.src), ftell(fv1.dst), fv1.byte);
 				fclose(fv1.src);
-				/*
-				 * zero pad here
-				 */
-				fv1.byte = 0;
-				padder();
 				++fv1.fileindex;
 				fv1.src = fopen(filelist[fv1.fileindex], "rb");
 			}
 			else {
+				fclose(fv1.src);
 				break;
 			}
+			padder();
 		}
 	}
+	fv1.byte = 0x90;
+	while (ftell(fv1.dst) < 512 * 18 * 80 * 2) {
+		fwrite(&fv1.byte, 1, 1, fv1.dst);
+	}
+	printf("\nDISK CREATION DONE\n");
 	return 0;
 }
 
@@ -67,17 +69,20 @@ void file_init()
 
 void padder()
 {
+	fprintf(stdout, "Padding %s and adding header for %s\n", 
+			filelist[fv1.fileindex - 1], filelist[fv1.fileindex]);
 	int count, flag;
 	count = 0;
 	flag = 0;
 	fv1.byte = 0x90;
 	while (count < 2) {
 		if ((ftell(fv1.dst)) % 512 == 0 && flag == 0) {
-			insert_header();
+			if (fv1.fileindex < fv1.totalfiles) {
+				insert_header();
+			}
 			++flag;
 		}
 		while ((ftell(fv1.dst)) % 512 != 0) {
-			printf("%d\n", ftell(fv1.dst));
 			fwrite(&fv1.byte, 1, 1, fv1.dst);
 		}
 		++count;
@@ -87,7 +92,6 @@ void padder()
 
 void insert_header()
 {
-	printf("\nBINGO!!\n");
 	/*
 	 * Set jmp
 	 * Set magic

@@ -6,7 +6,6 @@
 section .boot
 bits 16
 	
-	nop
 	jmp boot_main		; main code of bootloader resides here
 
 %include "boot_util.asm"
@@ -28,6 +27,15 @@ boot_main:
 
 	mov dx, 0x02		; number of sectors to read
 	call read_disk
+	mov si, BOOT_MSG5
+	call print
+	mov bx, word [KERNEL_BASE]
+	mov es, bx
+	mov bx, word [KERNEL_OFFSET]
+	mov si, bx
+	mov dx, word [es:si]
+	call printhex
+	call printnl
 	mov bx, word [KERNEL_BASE]
 	mov es, bx
 	mov bx, word [KERNEL_OFFSET]
@@ -124,6 +132,7 @@ read_disk:
 	BOOT_MSG2 db "DISK READ SUCCESSFUL!! KERNEL LOADED!!", 0x00
 	BOOT_MSG3 db "KERNEL BASE ADDRESS: ", 0x00
 	BOOT_MSG4 db "KERNEL OFFSET ADDRESS: ", 0x00
+	BOOT_MSG5 db "FIRST WORD OF KERNEL: ", 0x00
 	KERNEL_BASE dw 0x1000
 	KERNEL_OFFSET dw 0x0000
 	DRIVE_NUMBER db 0x00

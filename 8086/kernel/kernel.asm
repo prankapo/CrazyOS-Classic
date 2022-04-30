@@ -66,6 +66,7 @@ kernel_main:
 	call seconds
 	jmp .1
 
+
 hours:
 	cli
 	mov al, 0x04		; access register 0x00 in CMOS for seconds
