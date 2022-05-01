@@ -3,6 +3,16 @@
 ####################################################################################
 .PHONY: run all doc_run doc_srun doc_stop doc_del clean
 
+AS := nasm
+ASFLAGS := -f elf32
+
+CC := x86_64-elf-gcc
+CFLAGS := -m16 -std=gnu99 -ffreestanding -O1 -Wall -Wextra -Iinclude -g
+
+LD := x86_64-elf-ld
+LDFLAGS := -melf_i386 -n -o 
+
+
 ####################################################################################
 # Qemu
 ####################################################################################
@@ -26,19 +36,23 @@ all: doc_run doc_stop diskmaker.exe
 binaries: boot.bin kernel.bin
 
 boot.bin: boot.o boot.ld
-	x86_64-elf-ld -melf_i386 -n -o $@ -T boot.ld boot.o --oformat binary
+	$(LD) $(LDFLAGS) $@ -T boot.ld boot.o --oformat binary
 
 boot.o: $(wildcard boot/*.asm)
-	nasm -I boot/ boot/boot.asm -f elf32 -o $@
+	$(AS) -I boot/ boot/boot.asm $(ASFLAGS) -o $@
 
-kernel.bin: kernel.o kernel.ld
-	x86_64-elf-ld -melf_i386 -n -o $@ -T kernel.ld kernel.o --oformat binary
-
-#kernel.o: $(wildcard kernel/*.asm)
-#	nasm $< -f elf32 -o $@
+kernel.bin: kernel.o terminal.o kernel.ld
+	$(LD) $(LDFLAGS) $@ -T kernel.ld kernel.o terminal.o --oformat binary
 
 kernel.o: kernel/kernel.c
-	x86_64-elf-gcc -m16 -std=gnu99 -ffreestanding -O2 -Wall -Wextra -c kernel/kernel.c -o kernel.o 
+	$(CC) $(CFLAGS) -c kernel/kernel.c -o kernel.o 
+
+terminal.o: kernel/terminal.c
+	$(CC) $(CFLAGS) -c kernel/terminal.c -o terminal.o
+
+
+
+
 ####################################################################################
 # Comands for managing build environment
 ####################################################################################
@@ -70,5 +84,5 @@ diskmaker.o: tools/diskmaker/diskmaker.c
 ####################################################################################
 # Clean binaries and object files. Do before "gitting"
 ####################################################################################
-clean: $(wildcard *.bin) $(wildcard *.o)
+clean: $(filter-out junk.bin, $(wildcard *.bin)) $(wildcard *.o)
 	rm $^
