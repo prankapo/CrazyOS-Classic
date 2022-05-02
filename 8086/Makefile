@@ -23,6 +23,15 @@ run: CrazyOS.bin
 		-device cirrus-vga\
 		-fda CrazyOS.bin -boot order=a 
 
+srun: diskmaker.exe 
+	./diskmaker.exe
+	cat CrazyOS.bin > CrazyOS.img
+	qemu-system-i386 -m 1 -k en-us -rtc base=localtime\
+		-device sb16\
+		-device adlib\
+		-device cirrus-vga\
+		-fda CrazyOS.bin -boot order=a 
+
 ####################################################################################
 # MAIN
 ####################################################################################

@@ -15,12 +15,9 @@ void main(void)
 			:
 			: "ax"
 			);
-
-	rprintf("Hello, world!%c", 0x0a);
-	rprintf("%cHellodddddddddddddddd\t", 0x0d);
-	rprintf("%d\n", 1234);
-	rprintf("%x\n", 16);
+	rprintf("A big brown fox jumped over a little lazy dog%d\n\t", 23456);
 	while (1) {
-		;	
+		//ch = getchar();
+		//putchar(ch);
 	}
 }
