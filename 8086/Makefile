@@ -4,7 +4,7 @@
 .PHONY: run all doc_run doc_srun doc_stop doc_del clean
 
 AS := nasm
-ASFLAGS := -f elf32
+ASFLAGS := -I include/ -f elf32 
 
 CC := x86_64-elf-gcc
 CFLAGS := -m16 -std=gnu99 -ffreestanding -O1 -Wall -Wextra -Iinclude -g
@@ -44,23 +44,20 @@ all: doc_run doc_stop diskmaker.exe
 ####################################################################################
 binaries: boot.bin kernel.bin
 
-boot.bin: boot.o boot.ld
-	$(LD) $(LDFLAGS) $@ -T boot.ld boot.o --oformat binary
+boot.bin: boot.ld boot.o
+	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
 
-boot.o: $(wildcard boot/*.asm)
-	$(AS) -I boot/ boot/boot.asm $(ASFLAGS) -o $@
+boot.o: boot/boot.asm
+	$(AS) boot/boot.asm $(ASFLAGS) -o $@
 
-kernel.bin: kernel.o terminal.o kernel.ld
-	$(LD) $(LDFLAGS) $@ -T kernel.ld kernel.o terminal.o --oformat binary
+kernel.bin: kernel.ld kernel.o terminal.o
+	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
 
-kernel.o: kernel/kernel.c
-	$(CC) $(CFLAGS) -c kernel/kernel.c -o kernel.o 
+kernel.o: kernel/kernel.asm
+	$(AS) kernel/kernel.asm $(ASFLAGS) -o $@
 
-terminal.o: kernel/terminal.c
-	$(CC) $(CFLAGS) -c kernel/terminal.c -o terminal.o
-
-
-
+terminal.o: include/terminal.asm
+	$(AS) $< $(ASFLAGS) -o $@
 
 ####################################################################################
 # Comands for managing build environment

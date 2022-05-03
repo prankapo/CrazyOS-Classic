@@ -3,10 +3,11 @@
 ; AUTHOR: PRANEET KAPOOR
 ; DATE: 11.04.2022 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-section .boot
+cpu 386
 bits 16
-	
-	jmp boot_main		; main code of bootloader resides here
+section .boot
+
+	jmp boot_main
 
 %include "boot_util.asm"
 
