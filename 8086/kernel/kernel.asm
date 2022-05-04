@@ -67,10 +67,14 @@ kernel_main:
 	mov cx, 0x01
 	call fstringdata
 	call printf
-
+	nop
+	nop
+	nop
 	call time
 	call date
-	jmp $
+.1:
+	call getchar
+	jmp .1
 
 
 section .data

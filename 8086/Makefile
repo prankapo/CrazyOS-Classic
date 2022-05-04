@@ -47,9 +47,10 @@ binaries: boot.bin kernel.bin $
 
 boot.bin: 
 	cd boot && make all
-	mv boot/boot.bin .
+	cp boot/boot.bin .
 
-kernel.bin: kernel/kernel.ld kernel/kernel.o include/terminal.o include/clock.o
+kernel.bin: kernel/kernel.ld kernel/kernel.o \
+	include/terminal.o include/clock.o
 	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
 
 kernel/kernel.o: kernel/kernel.asm
@@ -76,11 +77,9 @@ diskmaker.o: tools/diskmaker/diskmaker.c
 # Clean binaries and object files. Do before "gitting"
 ####################################################################################
 clean: $(filter-out junk.bin, $(wildcard *.bin)) $(wildcard *.o)
+	rm $^
 	cd boot && make clean
 	cd include && make clean
-	cd kernel && make clean
-	rm $^
-
 
 ####################################################################################
 # Comands for managing build environment

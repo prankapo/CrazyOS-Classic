@@ -6,6 +6,7 @@ section .text
 %include "legacyprint.asm"
 %include "printf.asm"
 %include "putchar.asm"
+%include "getchar.asm"
 
 global fstringdata
 
@@ -30,4 +31,3 @@ fstringdata:
 .1:
 	mov word [di], ax
 	ret
-	
