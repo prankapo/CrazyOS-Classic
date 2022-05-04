@@ -1,5 +1,9 @@
-global print, printhex, printdec, printnl
+global print, printhex, printphex, print8bitpackedBCD, printdec, printnl
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; PRINT
+; Responsible for basic string printing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 print:
 	mov bx, si
 .1:
@@ -12,6 +16,10 @@ print:
 	mov si, bx
 	ret
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; PRINTHEX
+; Basic hex printer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printhex:
 	mov cx, 0x04
 .1:
@@ -44,10 +52,26 @@ printhex:
 	.hex_num: db "0x0000", 0x00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; PRINT8BITPACKEDBCD
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+print8bitpackedBCD:
+	shl dx, 0x04
+	shr dl, 0x04
+	mov al, dh
+	add al, '0'
+	call putchar
+	mov al, dl
+	add al, '0'
+	call putchar
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; PRINTDEC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printdec:
 	push dx
+	push si
+	push di
 	mov ax, dx
 
 .divide:
@@ -79,11 +103,13 @@ printdec:
 	mov ax, word [.copy]
 	jmp .divide
 .end:
+	pop di
+	pop si
 	pop dx
 	mov byte [.flag], 0x00
 	mov byte [.q], 0x00
 	mov word [.copy], 0x00
-	mov word [.divisor], 0x00
+	mov word [.divisor], 10000
 	ret
 	.flag: db 0x00
 	.q: db 0x00

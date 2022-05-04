@@ -31,9 +31,6 @@ printf:
 	je .num
 	cmp al, 'x'
 	je .hex
-.2p:
-	add di, 0x02
-	jmp .1
 .char:
 	mov ax, word [di]
 	call putchar
@@ -50,6 +47,10 @@ printf:
 	pop di
 	pop si
 	jmp .2p
+.2p:
+	add di, 0x02
+	jmp .1
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; IF BACKSLASH IS ENCOUNTERED
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

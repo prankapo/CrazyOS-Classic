@@ -9,7 +9,7 @@ section .boot
 
 	jmp boot_main
 
-%include "boot_util.asm"
+%include "../include/boot/boot_util.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BOOT_MAIN

@@ -39,25 +39,48 @@ all: doc_run doc_stop diskmaker.exe
 	./diskmaker.exe
 	cat CrazyOS.bin > CrazyOS.img
 
+
 ####################################################################################
 # Making Binaries
 ####################################################################################
-binaries: boot.bin kernel.bin
+binaries: boot.bin kernel.bin $
 
-boot.bin: boot.ld boot.o
+boot.bin: 
+	cd boot && make all
+	mv boot/boot.bin .
+
+kernel.bin: kernel/kernel.ld kernel/kernel.o include/terminal.o include/clock.o
 	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
 
-boot.o: boot/boot.asm
-	$(AS) boot/boot.asm $(ASFLAGS) -o $@
+kernel/kernel.o: kernel/kernel.asm
+	$(AS) $^ $(ASFLAGS) -o $@
 
-kernel.bin: kernel.ld kernel.o terminal.o
-	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
+include/terminal.o: $(wildcard include/terminal/*.asm)
+	cd include && make terminal.o
 
-kernel.o: kernel/kernel.asm
-	$(AS) kernel/kernel.asm $(ASFLAGS) -o $@
+include/clock.o: $(wildcard include/clock/*.asm)
+	cd include && make clock.o
 
-terminal.o: include/terminal.asm
-	$(AS) $< $(ASFLAGS) -o $@
+
+####################################################################################
+# Commands for compiling and linking diskmaker tool
+####################################################################################
+diskmaker.exe: diskmaker.o
+	gcc $< -o diskmaker.exe
+
+diskmaker.o: tools/diskmaker/diskmaker.c
+	gcc -c $^
+
+
+####################################################################################
+# Clean binaries and object files. Do before "gitting"
+####################################################################################
+clean: $(filter-out junk.bin, $(wildcard *.bin)) $(wildcard *.o)
+	cd boot && make clean
+	cd include && make clean
+	cd kernel && make clean
+	rm $^
+
 
 ####################################################################################
 # Comands for managing build environment
@@ -77,18 +100,3 @@ doc_stop:
 
 doc_del:
 	docker rm crazyos_buildenv
-
-####################################################################################
-# Commands for compiling and linking diskmaker tool
-####################################################################################
-diskmaker.exe: diskmaker.o
-	gcc $< -o diskmaker.exe
-
-diskmaker.o: tools/diskmaker/diskmaker.c
-	gcc -c $^
-
-####################################################################################
-# Clean binaries and object files. Do before "gitting"
-####################################################################################
-clean: $(filter-out junk.bin, $(wildcard *.bin)) $(wildcard *.o)
-	rm $^

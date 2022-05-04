@@ -29,6 +29,7 @@ bits 16
 section .text
 
 %include "terminal.inc"
+%include "clock.inc"
 
 kernel_entry:
 	mov ax, cs
@@ -40,94 +41,41 @@ kernel_entry:
 	mov sp, bp
 
 kernel_main:
-	call printnl
+	mov al, 0x0a
+	call putchar
+	
 	mov si, MSG1
+	mov ax, 1234
+	mov cx, 0x01
+	call fstringdata
 	call printf
 	
 	mov si, MSGCS
-	call print
-	mov dx, cs
-	call printhex
-	call printnl
+	mov ax, cs
+	mov cx, 0x01
+	call fstringdata
+	call printf
 	
 	mov si, MSGSS
-	call print
-	mov dx, ss
-	call printhex
-	call printnl
+	mov ax, ss
+	mov cx, 0x01
+	call fstringdata
+	call printf
 
 	mov si, MSGBP
-	call print
-	mov dx, bp
-	call printhex
-	call printnl
+	mov ax, bp
+	mov cx, 0x01
+	call fstringdata
+	call printf
 
-time:
-	call hours
-	call minutes
-	call seconds
-	jmp time
+	call time
+	call date
+	jmp $
 
-hours:
-	cli
-	mov al, 0x04		; access register 0x00 in CMOS for seconds
-	out 0x70, al
-	mov ax, 0x00
-	nop			; wait...
-	in al, 0x71
-	push ax
-	sti
-	mov ah, 0x02		; function code for setting cursor position
-	mov bh, 0x00		; page number
-	mov dh, 23d		; row number
-	mov dl, 57d		; column number
-	int 0x10
-	pop dx
-	call printhex
-	call printnl
-	ret
-
-minutes:
-	cli
-	mov al, 0x02		; access register 0x00 in CMOS for seconds
-	out 0x70, al
-	mov ax, 0x00
-	nop			; wait...
-	in al, 0x71
-	push ax
-	sti
-	mov ah, 0x02		; function code for setting cursor position
-	mov bh, 0x00		; page number
-	mov dh, 23d		; row number
-	mov dl, 64d		; column number
-	int 0x10
-	pop dx
-	call printhex
-	call printnl
-	ret
-
-seconds:
-	cli
-	mov al, 0x00		; access register 0x00 in CMOS for seconds
-	out 0x70, al
-	mov ax, 0x00
-	nop			; wait...
-	in al, 0x71
-	push ax
-	sti
-	mov ah, 0x02		; function code for setting cursor position
-	mov bh, 0x00		; page number
-	mov dh, 23d		; row number
-	mov dl, 71d		; column number
-	int 0x10
-	pop dx
-	call printhex
-	call printnl
-	ret
 
 section .data
-	MSG1: dw "Hello %x world \n%c a big brown fox jumped over a little lazy dog\t%d\n", 0x0000, 0xabcd, '>', 1
-	MSGCS: db "CS = ", 0x00
-	MSGSS: db "SS = ", 0x00
-	MSGBP: db "BP = ", 0x00
-	MSGSP: db "SP = ", 0x00
+	MSG1: dw "Hello world from kernel!! %d %x %c\t\n", 0x0000, 0xfff, 0xabcd, '>'
+	MSGCS: dw "CS = %x\n", 0x00, 0x00
+	MSGSS: dw "SS = %x\n", 0x00, 0x00
+	MSGBP: dw "BP = %x\n", 0x00, 0x00
+	MSGSP: dw "SP = %x\n", 0x00, 0x00
