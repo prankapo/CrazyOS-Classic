@@ -122,5 +122,3 @@ year:
 	mov dx, ax
 	sti
 	ret
-
-	ret
