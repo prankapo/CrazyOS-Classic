@@ -1,5 +1,5 @@
-cpu 386
 bits 16
+align 16
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; KERNEL ENTRY POINT
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,13 +93,11 @@ kernel_main:
 	call fstringdata
 	mov si, MSGSP
 	call printf
-	mov ax, sp
-	call printhex
-	call printnl
 
 	mov si, MSG3
-	call print
-	call printnl
+	call printf
+	mov si, MSG3
+	call printf
 	call time
 	call date
 .1:
@@ -109,10 +107,10 @@ kernel_main:
 
 
 section .data
-	MSG1: dw "Hello world from kernel!! %d %x \t\n", 0x0000, 0xfff, 0xabcd
-	MSG2: dw "My name is Praneet Kapoor I was born on %d %d %d!\n", 0x00, 0, 0, 0
-	MSG3: dw "A big brown fox jumped over a little lazy dog! Now you should all run!!", 0x00
 	MSGCS: dw "CS = %x\n", 0x00, 0x00
 	MSGSS: dw "SS = %x\n", 0x00, 0x00
 	MSGBP: dw "BP = %x\n", 0x00, 0x00
 	MSGSP: dw "SP = %x\n", 0x00, 0x00
+	MSG1: dw "Hello world from kernel!! %d %x \t\n", 0x0000, 0xfff, 0xabcd
+	MSG2: dw "My name is Praneet Kapoor I was born on %d %d %d!\n", 0x00, 0, 0, 0
+	MSG3: dw "\n\n123456789 123456789 123456789\n", 0x00

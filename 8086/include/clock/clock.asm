@@ -1,6 +1,5 @@
-cpu 386
 bits 16
-
+align 16
 %include "ttyio.inc"
 
 global time

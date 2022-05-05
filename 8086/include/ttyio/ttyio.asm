@@ -1,6 +1,5 @@
-cpu 386
 bits 16
-
+align 16
 section .text
 
 %include "legacyprint.asm"
