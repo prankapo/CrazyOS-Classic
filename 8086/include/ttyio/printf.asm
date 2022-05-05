@@ -31,16 +31,17 @@ printf:
 	je .num
 	cmp al, 'x'
 	je .hex
+	jmp .2p
 .char:
 	mov ax, word [di]
 	call putchar
 	jmp .2p
 .num:
-	mov dx, word [di]
+	mov ax, word [di]
 	call printdec
 	jmp .2p
 .hex:
-	mov dx, word [di]
+	mov ax, word [di]
 	push si
 	push di
 	call printhex

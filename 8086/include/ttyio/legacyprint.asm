@@ -21,6 +21,7 @@ print:
 ; Basic hex printer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printhex:
+	mov dx, ax
 	mov cx, 0x04
 .1:
 	mov ax, dx
@@ -55,6 +56,7 @@ printhex:
 ; PRINT8BITPACKEDBCD
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 print8bitpackedBCD:
+	mov dx, ax
 	shl dx, 0x04
 	shr dl, 0x04
 	mov al, dh
@@ -72,7 +74,6 @@ printdec:
 	push dx
 	push si
 	push di
-	mov ax, dx
 
 .divide:
 	mov dx, 0x00

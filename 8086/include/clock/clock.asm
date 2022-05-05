@@ -1,10 +1,12 @@
 cpu 386
 bits 16
 
-%include "terminal.inc"
+%include "ttyio.inc"
 
 global time
 time:
+	mov ax, 0x0a
+	call putchar
 	call hours
 	call print8bitpackedBCD 
 	mov al, ':'
@@ -27,7 +29,6 @@ hours:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret
 minutes:
@@ -37,7 +38,6 @@ minutes:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret
 seconds:
@@ -47,7 +47,6 @@ seconds:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret
 
@@ -99,7 +98,6 @@ day:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret
 month:
@@ -109,7 +107,6 @@ month:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret
 year:
@@ -119,6 +116,5 @@ year:
 	mov ax, 0x00
 	nop			; wait...
 	in al, 0x71
-	mov dx, ax
 	sti
 	ret

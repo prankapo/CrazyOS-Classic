@@ -50,14 +50,14 @@ boot.bin:
 	cp boot/boot.bin .
 
 kernel.bin: kernel/kernel.ld kernel/kernel.o \
-	include/terminal.o include/clock.o
+	include/ttyio.o include/clock.o
 	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
 
 kernel/kernel.o: kernel/kernel.asm
 	$(AS) $^ $(ASFLAGS) -o $@
 
-include/terminal.o: $(wildcard include/terminal/*.asm)
-	cd include && make terminal.o
+include/ttyio.o: $(wildcard include/ttyio/*.asm)
+	cd include && make ttyio.o
 
 include/clock.o: $(wildcard include/clock/*.asm)
 	cd include && make clock.o
