@@ -1,11 +1,9 @@
 bits 16
 align 16
-section .text
 
 %include "legacyprint.asm"
 %include "printf.asm"
-%include "putchar.asm"
-%include "getchar.asm"
+%include "stdtty.asm"
 
 global fstringdata
 

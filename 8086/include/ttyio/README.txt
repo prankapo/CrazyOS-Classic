@@ -84,9 +84,8 @@ INPUT: si = address of the string
 OUTPUT: Nothing
 
 FUNCTION NAME: putchar
-DESCRIPTION: Prints out a character
-INPUT: 	AH = Keyboard scan code
-	AL = ASCII character
+DESCRIPTION: Prints out a readable ascii character
+INPUT:	AL = ASCII character
 OUTPUT: Nothing
 
 FUNCTION NAME: getchar

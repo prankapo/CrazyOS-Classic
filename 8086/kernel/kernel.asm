@@ -41,76 +41,24 @@ kernel_entry:
 	mov sp, bp
 
 kernel_main:
-	mov al, 0x0a
-	call putchar
+	call clear
+	mov si, TEST_MSG
+	call printf
 	
-	
-	mov si, MSG1
-	mov ax, 1234
-	mov cx, 0x01
-	call fstringdata
-	call printf
-	mov si, MSG2
-	mov ax, 20
-	mov cx, 1
-	call fstringdata
-	mov si, MSG2
-	mov ax, 06
-	mov cx, 2
-	call fstringdata
-	mov si, MSG2
-	mov ax, 1999
-	mov cx, 3
-	call fstringdata
-	mov si, MSG2
-	mov di, MSG2
-	call printf
-
-	mov si, MSGCS
-	mov ax, cs
-	mov cx, 0x01
-	call fstringdata
-	mov si, MSGCS
-	call printf
-
-	mov si, MSGSS
-	mov ax, ss
-	mov cx, 0x01
-	call fstringdata
-	mov si, MSGSS
-	call printf
-
-	mov si, MSGBP
-	mov ax, bp
-	mov cx, 0x01
-	call fstringdata
-	mov si, MSGBP
-	call printf
-
-	mov si, MSGSP
-	mov ax, sp
-	mov cx, 0x01
-	call fstringdata
-	mov si, MSGSP
-	call printf
-
-	mov si, MSG3
-	call printf
-	mov si, MSG3
+	mov si, TIME
 	call printf
 	call time
+	call printnl
+	mov si, DATE
+	call printf
 	call date
+	call printnl
 .1:
 	call getchar
 	call putchar
 	jmp .1
 
-
 section .data
-	MSGCS: dw "CS = %x\n", 0x00, 0x00
-	MSGSS: dw "SS = %x\n", 0x00, 0x00
-	MSGBP: dw "BP = %x\n", 0x00, 0x00
-	MSGSP: dw "SP = %x\n", 0x00, 0x00
-	MSG1: dw "Hello world from kernel!! %d %x \t\n", 0x0000, 0xfff, 0xabcd
-	MSG2: dw "My name is Praneet Kapoor I was born on %d %d %d!\n", 0x00, 0, 0, 0
-	MSG3: dw "\n\n123456789 123456789 123456789\n", 0x00
+	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
+	DATE: dw "DATE: ", 0x00
+	TIME: dw "TIME: ", 0x00

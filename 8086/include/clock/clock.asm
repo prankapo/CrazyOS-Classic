@@ -2,10 +2,9 @@ bits 16
 align 16
 %include "ttyio.inc"
 
+section .text
 global time
 time:
-	mov ax, 0x0a
-	call putchar
 	call hours
 	call print8bitpackedBCD 
 	mov al, ':'
@@ -18,8 +17,6 @@ time:
 	
 	call seconds
 	call print8bitpackedBCD 
-	mov al, 0x0a
-	call putchar
 	ret
 hours:
 	cli
@@ -52,7 +49,7 @@ seconds:
 global date
 date:
 	call weekday
-	mov si, .SUN
+	mov si, SUN
 	sub ax, 0x01
 	mov dh, 0x08
 	mul dh
@@ -71,16 +68,8 @@ date:
 
 	call year
 	call print8bitpackedBCD
-	mov al, 0x0a
-	call putchar
 	ret
-	.SUN: dw "SUN, ", 0x00
-	.MON: dw "MON, ", 0x00
-	.TUE: dw "TUE, ", 0x00
-	.WED: dw "WED, ", 0x00
-	.THU: dw "THU, ", 0x00
-	.FRI: dw "FRI, ", 0x00
-	.SAT: dw "SAT, ", 0x00
+	
 weekday:
 	cli
 	mov al, 0x06		; access register 0x06 in CMOS for weekday
@@ -117,3 +106,13 @@ year:
 	in al, 0x71
 	sti
 	ret
+
+
+section .data
+	SUN: dw "SUN, ", 0x00
+	MON: dw "MON, ", 0x00
+	TUE: dw "TUE, ", 0x00
+	WED: dw "WED, ", 0x00
+	THU: dw "THU, ", 0x00
+	FRI: dw "FRI, ", 0x00
+	SAT: dw "SAT, ", 0x00
