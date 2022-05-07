@@ -54,8 +54,7 @@ kernel_main:
 	call date
 	call printnl
 .1:
-	call getchar
-	call putchar
+	call getline
 	jmp .1
 
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
