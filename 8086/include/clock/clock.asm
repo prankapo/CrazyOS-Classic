@@ -70,6 +70,7 @@ date:
 	call print8bitpackedBCD
 	ret
 	
+
 weekday:
 	cli
 	mov al, 0x06		; access register 0x06 in CMOS for weekday
@@ -107,8 +108,6 @@ year:
 	sti
 	ret
 
-
-section .data
 	SUN: dw "SUN, ", 0x00
 	MON: dw "MON, ", 0x00
 	TUE: dw "TUE, ", 0x00
@@ -116,3 +115,4 @@ section .data
 	THU: dw "THU, ", 0x00
 	FRI: dw "FRI, ", 0x00
 	SAT: dw "SAT, ", 0x00
+section .data
