@@ -58,7 +58,7 @@ kernel_main:
 	call putchar
 	jmp .1
 
-section .data
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 	DATE: dw "DATE: ", 0x00
 	TIME: dw "TIME: ", 0x00
+section .data
