@@ -5,7 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 cpu 386
 bits 16
-section .boot
+section .boot align=16
 
 org 0x7c00
 	jmp boot_main
