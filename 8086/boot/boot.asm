@@ -7,6 +7,7 @@ cpu 386
 bits 16
 section .boot
 
+org 0x7c00
 	jmp boot_main
 
 %include "../include/boot/boot_util.asm"
