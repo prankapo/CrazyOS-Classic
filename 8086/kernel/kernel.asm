@@ -42,9 +42,12 @@ kernel_entry:
 
 kernel_main:
 	call clear
-	
 .1:
 	call getline
+	mov si, BUFFER
+	call print
+	call printnl
+	call flush
 	jmp .1
 
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00

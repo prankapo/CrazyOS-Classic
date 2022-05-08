@@ -76,7 +76,7 @@ putchar:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; GETLINE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global getline
+global getline, BUFFER, BUFFER_END
 getline:
 	call flush
 	mov ax, BUFFER
@@ -195,10 +195,9 @@ getline:
 	jmp .get
 .return_point:
 	mov si, BUFFER
-	call print
-	call printnl
-	call flush
 	ret
+	BUFFER: times 80 db 0x00, 0x00
+	BUFFER_END: dw 0x00
 
 findcursorposition:
 	mov ah, 0x03
@@ -212,5 +211,3 @@ findcursorposition:
 	.pg: db 0x00
 
 section .data
-	BUFFER: times 80 db 0x00, 0x00
-	BUFFER_END: dw 0x00

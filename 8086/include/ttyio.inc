@@ -3,4 +3,4 @@ extern printhex, print8bitpackedBCD, printdec
 extern fstringdata, printf, putchar
 extern getchar
 extern clear, flush
-extern getline
+extern getline, BUFFER, BUFFER_END
