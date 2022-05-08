@@ -129,6 +129,7 @@ getline:
 	cmp si, word [BUFFER_END]
 	jle .P1
 	pop si
+	inc dx
 	mov bh, 0x00
 	mov ah, 0x02
 	int 0x10
