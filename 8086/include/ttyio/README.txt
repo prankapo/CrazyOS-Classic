@@ -51,6 +51,11 @@ NOTE: Try not to load and print big strings using fstringdata and printf,
 respectively,  as that can mess things up. If you have to then use print, 
 printnl, printhex, and printdec.
 
+FUNCTION NAME: clear
+DESCRIPTION: Clears the screen
+INPUT: Nothing
+OUTPUT: Nothing
+
 FUNCTION NAME: print
 DESCRIPTION: Prints out the string pointed at by si
 INPUT: si = address of first byte of a string
@@ -93,3 +98,14 @@ DESCRIPTION: Reads keystroke
 INPUT: Nothing
 OUTPUT: AH = Keyboard scan code
 	AL = ASCII Character
+
+FUNCTION NAME: getline
+DESCRIPTION: Reads a keystroke, operates on an 80 character buffer and displays it till Enter key/Newline is encountered.
+INPUT: Nothing
+OUTPUT: BUFFER = This 80 character array stores the characters you have filled it with getline
+	BUFFER_END = Contains the address of the last 'cell' of BUFFER.
+
+FUNCTION NAME = flush
+DESCRIPTION = Flushes the buffer
+INPUT: Nothing
+OUTPUT: Nothing
