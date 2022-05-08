@@ -79,6 +79,9 @@ putchar:
 global getline
 getline:
 	call flush
+	mov ax, BUFFER
+	add ax, 80
+	mov word [BUFFER_END], ax
 	mov si, BUFFER
 .get:
 	call getchar
@@ -112,11 +115,23 @@ getline:
 	cmp ah, 0x48
 	je .UP
 	; out of switch case
-	cmp si, BUFFER_END
+	cmp si, word [BUFFER_END]
 	je .get
-	mov byte [si], al
+	; Here we will deal with the normal characters
+	call findcursorposition
+	push si
+.P1:
 	call putchar
+	mov bl, byte [si]
+	mov byte [si], al
+	mov al, bl
 	inc si
+	cmp si, word [BUFFER_END]
+	jle .P1
+	pop si
+	mov bh, 0x00
+	mov ah, 0x02
+	int 0x10
 	jmp .get
 .BACKSPACE:
 	cmp si, BUFFER
@@ -132,13 +147,13 @@ getline:
 	; fix the buffer and the screen
 	push si
 	call findcursorposition
-.L1:
+.B1:
 	mov al, byte [si + 1]
 	mov byte [si], al
 	call putchar
 	inc si
-	cmp si, BUFFER_END
-	jle .L1
+	cmp si, word [BUFFER_END]
+	jle .B1
 	pop si
 	mov bh, 0x00
 	mov ah, 0x02
@@ -146,7 +161,6 @@ getline:
 	jmp .get
 .ENTER:
 	mov al, 0x0a
-	mov byte [si], al
 	call putchar
 	jmp .return_point
 .DOWN:
@@ -197,4 +211,4 @@ findcursorposition:
 
 section .data
 	BUFFER: times 80 db 0x00, 0x00
-	BUFFER_END:
+	BUFFER_END: dw 0x00
