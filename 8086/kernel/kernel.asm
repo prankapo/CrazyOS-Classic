@@ -42,17 +42,7 @@ kernel_entry:
 
 kernel_main:
 	call clear
-	mov si, TEST_MSG
-	call printf
 	
-	mov si, TIME
-	call printf
-	call time
-	call printnl
-	mov si, DATE
-	call printf
-	call date
-	call printnl
 .1:
 	call getline
 	jmp .1
