@@ -25,7 +25,7 @@ clear:
 ; FLUSH
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 flush:
-	mov di, GETLINE_BUFFER		; point to the buffer
+	mov di, GETLINE_BUFFER	; point to the buffer
 	mov cx, 80		; buffer length is 80, so load that in cx
 	mov al, 0x00		; this is the byte will be loading the buffer with
 .1:

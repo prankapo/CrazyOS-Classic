@@ -31,7 +31,8 @@ build/boot.bin: boot/boot.asm boot/boot_util.asm
 
 build/kernel.bin: kernel/kernel.asm\
 	$(wildcard include/ttyio/*.asm)\
-	$(wildcard include/cmos/*.asm)
+	$(wildcard include/cmos/*.asm)\
+	$(wildcard shell/*.asm)
 	$(AS) $< $(ASFLAGS) -o $@
 
 build/disk2.bin: mkdisk2.asm
