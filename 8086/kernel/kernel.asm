@@ -27,9 +27,6 @@ align 16
 ; 0x7c00: | 16-bit Bootloader  |
 ;          --------------------
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-%define RTCaddress 0x70
-%define RTCdata 0x71
 kernel_entry:
 	mov ax, cs
 	mov ds, ax
@@ -54,25 +51,5 @@ kernel_main:
 
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; SHOWTIME
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-showtime:
-.1:	
-	mov al, 0x0a
-	out RTCaddress, al
-	in al, RTCdata
-	test al, 0x80		; if bit 7 is set, then an update is in progress
-	je .1
-	
-	mov al, 0x04
-	out RTCaddress, al
-	in al, RTCdata
-	call print8bitpackedBCD
-	mov al, 0x02
-	out RTCaddress, al
-	in al, RTCdata
-	call print8bitpackedBCD
-	ret
-
+%include "include/cmos/clock.asm"
 %include "include/ttyio/ttyio.asm"
