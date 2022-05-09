@@ -26,11 +26,6 @@ align 16
 ; 0x7c00: | 16-bit Bootloader  |
 ;          --------------------
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-section .text
-
-%include "ttyio.inc"
-%include "clock.inc"
-
 kernel_entry:
 	mov ax, cs
 	mov ds, ax
@@ -42,15 +37,17 @@ kernel_entry:
 
 kernel_main:
 	call clear
+	mov si, TEST_MSG
+	call printf
 .1:
 	call getline
-	mov si, BUFFER
+	mov si, GETLINE_BUFFER
 	call print
 	call printnl
 	call flush
 	jmp .1
 
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
-	DATE: dw "DATE: ", 0x00
-	TIME: dw "TIME: ", 0x00
-section .data
+	
+%include "include/ttyio/ttyio.asm"
+%include "include/clock/clock.asm"

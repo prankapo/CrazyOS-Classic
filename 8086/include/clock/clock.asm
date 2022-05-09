@@ -1,9 +1,9 @@
 bits 16
 align 16
-%include "ttyio.inc"
 
-section .text
-global time
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; TIME
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 time:
 	call hours
 	call print8bitpackedBCD 
@@ -23,7 +23,9 @@ hours:
 	mov al, 0x04		; access register 0x00 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1			
 	in al, 0x71
 	sti
 	ret
@@ -32,7 +34,9 @@ minutes:
 	mov al, 0x02		; access register 0x00 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
@@ -41,12 +45,16 @@ seconds:
 	mov al, 0x00		; access register 0x00 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
 
-global date
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; DATE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 date:
 	call weekday
 	mov si, SUN
@@ -76,7 +84,9 @@ weekday:
 	mov al, 0x06		; access register 0x06 in CMOS for weekday
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
@@ -85,7 +95,9 @@ day:
 	mov al, 0x07		; access register 0x07 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
@@ -94,7 +106,9 @@ month:
 	mov al, 0x08		; access register 0x08 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
@@ -103,7 +117,9 @@ year:
 	mov al, 0x09		; access register 0x09 in CMOS for seconds
 	out 0x70, al
 	mov ax, 0x00
-	nop			; wait...
+	mov cx, 100		; wait...
+.1:
+	loop .1		
 	in al, 0x71
 	sti
 	ret
@@ -115,4 +131,3 @@ year:
 	THU: dw "THU, ", 0x00
 	FRI: dw "FRI, ", 0x00
 	SAT: dw "SAT, ", 0x00
-section .data

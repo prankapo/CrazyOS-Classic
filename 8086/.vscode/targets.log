@@ -1,0 +1,512 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-msys
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Mon May  9 10:25:47 2022
+
+# Variables
+
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# makefile (from 'Makefile', line 6)
+AS := nasm
+# environment
+LC_ALL = C
+# environment
+USERPROFILE = C:\Users\kapoorpraneet
+ 
+# environment
+LOCALAPPDATA = C:\Users\kapoorpraneet\AppData\Local
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-56eb20e6-599d-45d0-9e4a-6241071ab5b3-sock
+# environment
+VSCODE_CWD = C:\Users\kapoorpraneet\AppData\Local\Programs\Microsoft VS Code
+# environment
+SYSTEMROOT = C:\Windows
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_20032_BGBMWKCPGWFBRYHT
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\kapoorpraneet\AppData\Roaming\Code\CachedData\57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = /c/Users/KAPOOR~1/AppData/Local/Temp
+# default
+.INCLUDE_DIRS = /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# environment
+ONEDRIVE = C:\Users\kapoorpraneet\OneDrive
+# makefile
+CURDIR := /c/Data Centre/Projects/CrazyOS/8086
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+PROGRAMFILES = C:\Program Files
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+!C: = c:\Data Centre\Projects\CrazyOS\8086
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# makefile (from 'Makefile', line 7)
+ASFLAGS := -f bin
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 20032
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# environment
+ONEDRIVECONSUMER = C:\Users\kapoorpraneet\OneDrive
+# default
+MAKE_HOST := x86_64-pc-msys
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := /bin/sh
+# environment
+HOMEPATH = \Users\kapoorpraneet
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# environment
+WINDIR = C:\Windows
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /c/Program Files (x86)/VMware/VMware Player/bin:/c/Python/Scripts:/c/Python:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Program Files/Polyspace/R2021a/runtime/win64:/c/Program Files/Polyspace/R2021a/bin:/c/Program Files/Polyspace/R2021a/polyspace/bin:/c/Program Files/MiKTeX/miktex/bin/x64:/c/Program Files/Git/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/ProgramData/DockerDesktop/version-bin:/c/Program Files (x86)/gnupg/bin:/c/Users/kapoo/AppData/Local/Microsoft/WindowsApps:/c/Users/kapoo/AppData/Local/gitkraken/bin:/c/Program Files (x86)/Nmap:/c/Users/kapoorpraneet/AppData/Local/GitHubDesktop/bin:/c/Program Files/qemu:/c/Program Files (x86)/gnupg/bin:/c/Program Files (x86)/Vim/vim82:/mingw64/bin:/usr/bin:/c/Program Files/NASM:/c/Program Files/PowerISO:/c/Users/kapoorpraneet/AppData/Local/Programs/Microsoft VS Code/bin
+# environment
+ZES_ENABLE_SYSMAN = 1
+# environment
+COMPUTERNAME = DESKTOP-UN0AB3J
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+PROMPT = $P$G
+# environment
+LOGONSERVER = \\DESKTOP-UN0AB3J
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = kapoo
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# automatic
+?F = $(notdir $?)
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERDOMAIN = DESKTOP-UN0AB3J
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# makefile
+.DEFAULT_GOAL := run
+# default
+MAKE_VERSION := 4.3
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# makefile (from 'Makefile', line 9)
+LDFLAGS := -melf_i386 -n -o 
+# environment
+USERDOMAIN_ROAMINGPROFILE = DESKTOP-UN0AB3J
+# environment
+NUMBER_OF_PROCESSORS = 8
+# environment
+PUBLIC = C:\Users\Public
+# environment
+APPDATA = C:\Users\kapoorpraneet\AppData\Roaming
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/kapoo
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = /c/Users/KAPOOR~1/AppData/Local/Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\a570d8d89a3daa86793b4be74c23122c-1.67.0-main-sock
+# environment
+TERM = xterm-256color
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# makefile (from 'Makefile', line 8)
+LD := x86_64-elf-ld
+# environment
+SESSIONNAME = Console
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+PROCESSOR_REVISION = 8c01
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+# variable set hash-table stats:
+# Load=102/1024=10%, Rehash=0, Collisions=13/132=10%
+
+ 
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# include/clock (device 484178585, inode 1970324837070509): 3 files, no impossibilities.
+# include/ttyio (device 484178585, inode 11258999068500312): 7 files, no impossibilities.
+# . (device 484178585, inode 2533274790546383): 17 files, no impossibilities.
+
+# 27 files, no impossibilities in 3 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+CrazyOS.bin:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/clock/clock.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+tools/diskmaker/diskmaker.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+doc_srun:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 89):
+	docker run --rm -it -i --name=crazyos_buildenv -v "C:\Data Centre\Projects\CrazyOS\8086":/root/env crazyos_buildenv
+
+include/ttyio.o: include/ttyio/legacyprint.asm include/ttyio/printf.asm include/ttyio/stdtty.asm include/ttyio/ttyio.asm
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	cd include && make ttyio.o
+
+kernel/kernel.o: kernel/kernel.asm
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 51):
+	$(AS) $^ $(ASFLAGS) -o $@
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-09 09:32:13.4856916
+#  File has been updated.
+#  Successfully updated.
+
+clean: CrazyOS.bin boot.bin kernel.bin diskmaker.o
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 74):
+	rm $^
+	cd boot && make clean
+	cd include && make clean
+
+# Not a target:
+include/ttyio/printf.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/ttyio/legacyprint.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+kernel/kernel.ld:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+kernel/kernel.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+diskmaker.exe: diskmaker.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 64):
+	gcc $< -o diskmaker.exe
+
+boot.bin:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 43):
+	cd boot && make all
+	cp boot/boot.bin .
+
+doc_run:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := doc_run
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'Makefile', line 85):
+ 
+	docker run --rm -d -i --name=crazyos_buildenv -v "C:\Data Centre\Projects\CrazyOS\8086":/root/env crazyos_buildenv
+	docker exec -d crazyos_buildenv make binaries
+
+binaries: boot.bin kernel.bin $
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: doc_run doc_stop diskmaker.exe
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+#  recipe to execute (from 'Makefile', line 33):
+	./diskmaker.exe
+	cat CrazyOS.bin > CrazyOS.img
+
+run: CrazyOS.bin
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 14):
+	qemu-system-i386 -m 1 -k en-us -rtc base=localtime\
+		-device sb16\
+		-device adlib\
+		-device cirrus-vga\
+		-fda CrazyOS.bin -boot order=a 
+
+srun: diskmaker.exe
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 21):
+	./diskmaker.exe
+	cat CrazyOS.bin > CrazyOS.img
+	qemu-system-i386 -m 1 -k en-us -rtc base=localtime\
+		-device sb16\
+		-device adlib\
+		-device cirrus-vga\
+		-fda CrazyOS.bin -boot order=a 
+
+# Not a target:
+$:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/clock.o: include/clock/clock.asm
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	cd include && make clock.o
+
+diskmaker.o: tools/diskmaker/diskmaker.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	gcc -c $^
+
+kernel.bin: kernel/kernel.ld kernel/kernel.o include/ttyio.o include/clock.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 48):
+	$(LD) $(LDFLAGS) $@ -T $^ --oformat binary
+
+doc_dep: tools/buildenv/Dockerfile
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 82):
+	docker build tools/buildenv -t crazyos_buildenv
+
+# Not a target:
+include/ttyio/ttyio.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+doc_del:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 95):
+	docker rm crazyos_buildenv
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/ttyio/stdtty.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: run all doc_run doc_srun doc_stop doc_del clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+doc_stop:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	docker stop crazyos_buildenv
+
+# Not a target:
+tools/buildenv/Dockerfile:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=32/1024=3%, Rehash=0, Collisions=3/89=3%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 52 / storage = 616 B / avg = 11 B
+# current buf: size = 8162 B / used = 616 B / count = 52 / avg = 11 B
+
+# strcache performance: lookups = 106 / hit rate = 50%
+# hash-table stats:
+# Load=52/8192=1%, Rehash=0, Collisions=0/106=0%
+# Finished Make data base on Mon May  9 10:25:47 2022
+
+ 

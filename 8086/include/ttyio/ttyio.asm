@@ -1,11 +1,9 @@
 bits 16
 align 16
 
-%include "legacyprint.asm"
-%include "printf.asm"
-%include "stdtty.asm"
-
-global fstringdata
+%include "include/ttyio/legacyprint.asm"
+%include "include/ttyio/printf.asm"
+%include "include/ttyio/stdtty.asm"
 
 fstringdata:
 	push ax

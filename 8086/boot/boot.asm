@@ -5,12 +5,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 cpu 386
 bits 16
-section .boot align=16
+align 16
 
 org 0x7c00
 	jmp boot_main
 
-%include "../include/boot/boot_util.asm"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; INCLUDED FILES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%include "boot/boot_util.asm"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BOOT_MAIN
@@ -86,7 +89,7 @@ read_disk:
 	mov ah, 0x02		; read from the disk
 	mov al, dl		; number of sectors to read
 	mov ch, 0x00		; cylinder 0
-	mov cl, 0x03		; sector 3, because sector 1 is MBR
+	mov cl, 0x02		; sector 3, because sector 1 is MBR
 	mov dh, 0x00		; head 0
 	mov dl, [DRIVE_NUMBER]	; drive number
 	mov bx, [KERNEL_BASE]	; Segment base address for kernel

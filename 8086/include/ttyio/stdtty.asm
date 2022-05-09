@@ -1,7 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; CLEAR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global clear
 clear:
         ; blank out the screen
 	mov ah, 0x07		; function code for scrolling down
@@ -25,9 +24,8 @@ clear:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; FLUSH
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global flush
 flush:
-	mov di, BUFFER		; point to the buffer
+	mov di, GETLINE_BUFFER		; point to the buffer
 	mov cx, 80		; buffer length is 80, so load that in cx
 	mov al, 0x00		; this is the byte will be loading the buffer with
 .1:
@@ -38,7 +36,6 @@ flush:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; GETCHAR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global getchar
 getchar:
 	mov ah, 0x00		; for reading a key from the keyboard
 	int 0x16		; AH = keyscan, AL = ASCII code, if it is there
@@ -47,7 +44,6 @@ getchar:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; PUTCHAR
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global putchar
 putchar:
 	mov ah, 0x0e
 	cmp al, 0x09
@@ -76,13 +72,12 @@ putchar:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; GETLINE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-global getline, BUFFER, BUFFER_END
 getline:
 	call flush
-	mov ax, BUFFER
+	mov ax, GETLINE_BUFFER
 	add ax, 80
-	mov word [BUFFER_END], ax
-	mov si, BUFFER
+	mov word [GETLINE_BUFFER_END], ax
+	mov si, GETLINE_BUFFER
 .get:
 	call getchar
 	; switch case
@@ -115,7 +110,7 @@ getline:
 	cmp ah, 0x48
 	je .UP
 	; out of switch case
-	cmp si, word [BUFFER_END]
+	cmp si, word [GETLINE_BUFFER_END]
 	je .get
 	; Here we will deal with the normal characters
 	call findcursorposition
@@ -126,7 +121,7 @@ getline:
 	mov byte [si], al
 	mov al, bl
 	inc si
-	cmp si, word [BUFFER_END]
+	cmp si, word [GETLINE_BUFFER_END]
 	jle .P1
 	pop si
 	inc si
@@ -136,7 +131,7 @@ getline:
 	int 0x10
 	jmp .get
 .BACKSPACE:
-	cmp si, BUFFER
+	cmp si, GETLINE_BUFFER
 	je .get
 	dec si
 	mov byte [si], 0x00
@@ -154,7 +149,7 @@ getline:
 	mov byte [si], al
 	call putchar
 	inc si
-	cmp si, word [BUFFER_END]
+	cmp si, word [GETLINE_BUFFER_END]
 	jle .B1
 	pop si
 	mov bh, 0x00
@@ -194,10 +189,10 @@ getline:
 .UP:
 	jmp .get
 .return_point:
-	mov si, BUFFER
+	mov si, GETLINE_BUFFER
 	ret
-	BUFFER: times 80 db 0x00, 0x00
-	BUFFER_END: dw 0x00
+	GETLINE_BUFFER: times 80 db 0x00, 0x00
+	GETLINE_BUFFER_END: dw 0x00
 
 findcursorposition:
 	mov ah, 0x03
@@ -209,5 +204,3 @@ findcursorposition:
 	.row: db 0x00
 	.col: db 0x00
 	.pg: db 0x00
-
-section .data
