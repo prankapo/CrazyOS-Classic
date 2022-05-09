@@ -1,3 +1,4 @@
+cpu 386
 bits 16
 align 16
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39,6 +40,7 @@ kernel_main:
 	call clear
 	mov si, TEST_MSG
 	call printf
+	;call showtime
 .1:
 	call getline
 	mov si, GETLINE_BUFFER
@@ -50,4 +52,4 @@ kernel_main:
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 	
 %include "include/ttyio/ttyio.asm"
-%include "include/clock/clock.asm"
+%include "include/cmos/clock.asm"

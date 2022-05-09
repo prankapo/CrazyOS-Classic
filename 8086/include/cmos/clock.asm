@@ -1,56 +1,43 @@
 bits 16
 align 16
 
+%include "include/cmos/cmos.asm"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; SHOWTIME
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+showtime:
+	call time
+	mov ax, 0x00
+	mov al, byte [HRS]
+	call print8bitpackedBCD
+	mov al, byte [MIN]
+	call print8bitpackedBCD
+	mov al, byte [SEC]
+	call print8bitpackedBCD
+	mov al, 0x0a
+	call putchar
+	ret
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; TIME
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-time:
-	call hours
-	call print8bitpackedBCD 
-	mov al, ':'
-	call putchar
-	
-	call minutes
-	call print8bitpackedBCD 
-	mov al, ':'
-	call putchar
-	
-	call seconds
-	call print8bitpackedBCD 
-	ret
-hours:
-	cli
-	mov al, 0x04		; access register 0x00 in CMOS for seconds
-	out 0x70, al
+time:	
 	mov ax, 0x00
-	mov cx, 100		; wait...
-.1:
-	loop .1			
-	in al, 0x71
-	sti
+	mov al, 0x04
+	call read_cmos
+	mov byte [HRS], al
+	mov al, 0x02
+	call read_cmos
+	mov byte [MIN], al
+	mov al, 0x00
+	call read_cmos
+	mov byte [SEC], al
 	ret
-minutes:
-	cli
-	mov al, 0x02		; access register 0x00 in CMOS for seconds
-	out 0x70, al
-	mov ax, 0x00
-	mov cx, 100		; wait...
-.1:
-	loop .1		
-	in al, 0x71
-	sti
-	ret
-seconds:
-	cli
-	mov al, 0x00		; access register 0x00 in CMOS for seconds
-	out 0x70, al
-	mov ax, 0x00
-	mov cx, 100		; wait...
-.1:
-	loop .1		
-	in al, 0x71
-	sti
-	ret
+
+	HRS: db 0x00
+	MIN: db 0x00
+	SEC: db 0x00
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; DATE
