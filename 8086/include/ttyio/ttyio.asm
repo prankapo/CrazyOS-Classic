@@ -1,6 +1,7 @@
 bits 16
 align 16
-
+%ifndef TTYIO
+%define TTYIO
 %include "include/ttyio/legacyprint.asm"
 %include "include/ttyio/printf.asm"
 %include "include/ttyio/stdtty.asm"
@@ -26,3 +27,4 @@ fstringdata:
 .1:
 	mov word [di], ax
 	ret
+%endif

@@ -1,3 +1,5 @@
+%ifndef CMOS
+%define CMOS
 %define RTCaddress 0x70
 %define RTCdata 0x71
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -31,3 +33,4 @@ write_cmos:
         out RTCdata, al
         sti
         ret
+%endif
