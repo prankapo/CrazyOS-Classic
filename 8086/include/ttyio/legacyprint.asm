@@ -54,13 +54,16 @@ printhex:
 ; PRINT8BITPACKEDBCD
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 print8bitpackedBCD:
+	mov dx, 0x00
 	mov dx, ax
 	shl dx, 0x04
 	shr dl, 0x04
 	mov al, dh
+	and al, 0x0f		; this removes junk from the higher order nibble 
 	add al, '0'
 	call putchar
 	mov al, dl
+	and al, 0x0f
 	add al, '0'
 	call putchar
 	ret
