@@ -1,14 +1,21 @@
+%define RTCaddress 0x70
+%define RTCdata 0x71
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; READ_CMOS
 ; AL = index of the register to be accessed
 ; Upon return, AL contains the value returned from port 0x71
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 read_cmos:
-        cli
-        out 0x70, al
-        nop
-        in al, 0x71
-        sti
+.1:
+        push ax
+        mov al, 10
+        out RTCaddress, al
+        in al, RTCdata
+        test al, 0x80
+        jle .1
+        pop ax
+        out RTCaddress, al
+        in al, RTCdata
         ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -18,9 +25,9 @@ read_cmos:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 write_cmos:
         cli
-        out 0x70, al
+        out RTCaddress, al
         nop
         mov al, bl 
-        out 0x71, al
+        out RTCdata, al
         sti
         ret

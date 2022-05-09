@@ -40,16 +40,14 @@ kernel_main:
 	call clear
 	mov si, TEST_MSG
 	call printf
-	;call showtime
-.1:
+.while:
 	call getline
 	mov si, GETLINE_BUFFER
 	call print
 	call printnl
 	call flush
-	jmp .1
+	jmp .while
 
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
-	
+
 %include "include/ttyio/ttyio.asm"
-%include "include/cmos/clock.asm"
