@@ -120,6 +120,7 @@ printdec:
 	.div2: dw 10
 
 printnl: 
+	call conditional_scrollup
 	mov ah, 0x0e
 	mov al, 0x0a
 	int 0x10

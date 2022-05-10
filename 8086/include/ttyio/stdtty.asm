@@ -63,10 +63,8 @@ putchar:
 	ret
 	
 .NEWLINE:
-	mov al, 0x0a
-	int 0x10
-	mov al, 0x0d
-	int 0x10
+	call conditional_scrollup
+	call printnl
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -194,6 +192,9 @@ getline:
 	GETLINE_BUFFER: times 80 db 0x00, 0x00
 	GETLINE_BUFFER_END: dw 0x00
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; FINDCURSORPOSITION
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 findcursorposition:
 	mov ah, 0x03
 	mov bh, byte [.pg]
@@ -204,3 +205,33 @@ findcursorposition:
 	.row: db 0x00
 	.col: db 0x00
 	.pg: db 0x00
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; SCROLLUP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+scrollup:
+	mov ah, 0x06		; code for scrolling up
+	mov al, 0x02		; scroll up by one line only
+	mov bh, 0x1f
+	mov ch, 0x00
+	mov cl, 0x00
+	mov dh, 24d
+	mov dl, 79d
+	int 0x10
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; CONDITIONAL SCROLL UP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+conditional_scrollup:
+	call findcursorposition
+	cmp dh, 24d
+	jne .1
+	call scrollup
+	mov ah, 0x02
+	mov bh, 0x00
+	mov dh, 22d
+	mov dl, 00d
+	int 0x10
+.1:
+	ret
