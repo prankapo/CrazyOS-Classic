@@ -6,7 +6,7 @@
 AS := nasm
 ASFLAGS := -f bin
 
-KEEP := junk.bin disk2.bin
+KEEP := build/disk2.bin
 
 ####################################################################################
 # Qemu
@@ -16,15 +16,16 @@ run: build
 		-device sb16\
 		-device adlib\
 		-device cirrus-vga\
-		-fda build/CrazyOS.bin -fdb build/disk2.bin -boot order=a 
+		-fda build/CrazyOS.img -fdb build/disk2.bin -boot order=a 
 
 ####################################################################################
 # Making Binaries
 ####################################################################################
-build: build/CrazyOS.bin build/disk2.bin
+build: build/CrazyOS.img build/disk2.bin
 
-build/CrazyOS.bin: mkdisk1.asm build/boot.bin build/kernel.bin
-	$(AS) $< $(ASFLAGS) -o $@
+build/CrazyOS.img: mkdisk1.asm build/boot.bin build/kernel.bin
+	$(AS) $< $(ASFLAGS) -o build/CrazyOS.bin
+	cat build/CrazyOS.bin > build/CrazyOS.img
 
 build/boot.bin: boot/boot.asm boot/boot_util.asm
 	$(AS) $< $(ASFLAGS) -o $@
@@ -41,5 +42,5 @@ build/disk2.bin: mkdisk2.asm
 ####################################################################################
 # Clean binaries and object files. Do before "gitting"
 ####################################################################################
-clean: $(filter-out $(KEEP), $(wildcard build/*.bin))
+clean: $(filter-out $(KEEP), $(wildcard build/*.bin)) $(wildcard build/*.img)
 	rm $^
