@@ -6,16 +6,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 main:
         call getline
-        call lexer
-        mov al, '>'
-        call putchar
-        mov si, com
-        call print
+        call cmd_lexer
+        lea si, [com]
+        call printf
+        call printnl
+        lea si, [arg1]
+        call printf
+        call printnl
+        lea si, [arg2]
+        call printf
+        call printnl
+        lea si, [arg3]
+        call printf
+        call printnl
+        lea si, [arg4]
+        call printf
         call printnl
         call flush                      ; flush the line
         jmp main
 
-%include "include/ttyio/ttyio.asm"
 %include "shell/lexer.asm"
+%include "include/ttyio/ttyio.asm"
 %include "shell/cmdlist.asm"
 %endif

@@ -8,16 +8,11 @@
 ; Upon return, AL contains the value returned from port 0x71
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 read_cmos:
-.1:
-        push ax
-        mov al, 10
+        cli
         out RTCaddress, al
+        nop
         in al, RTCdata
-        test al, 0x80
-        jle .1
-        pop ax
-        out RTCaddress, al
-        in al, RTCdata
+        sti
         ret
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

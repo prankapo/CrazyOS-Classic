@@ -40,6 +40,8 @@ kernel_main:
 	call clear
 	mov si, TEST_MSG
 	call printf
+	call showdate
+	call showtime
 .while:
 	call main
 	jmp .while
@@ -47,4 +49,5 @@ kernel_main:
 	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 
 %include "include/ttyio/ttyio.asm"
+%include "include/cmos/clock.asm"
 %include "shell/shell.asm"
