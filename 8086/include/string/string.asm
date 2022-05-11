@@ -20,22 +20,18 @@ strlen:
 strcmp:
         mov word [.ptr1], si
         mov word [.ptr2], di
-        call printnl
         call strlen
-        mov cx, ax
-        mov si, word [.ptr1]
-        mov di, word [.ptr2]
-.1:
-        mov al, byte [si]
-        cmp byte [di], al
-        jne .false
-        inc di
-        inc si
-        loop .1
-        cmp byte [di], 0x00
+        mov bx, ax
+        mov si, word [.ptr2]
+        call strlen
+        cmp bx, ax
         jne .false
         mov al, 'T'
         call putchar
+        mov si, word [.ptr1]
+        mov di, word [.ptr2]
+        mov cx, bx
+        repe cmpsb
         cmp cx, 0x00
         je .true
 .false:
@@ -50,6 +46,4 @@ strcmp:
         ret
         .ptr1: dw 0x00
         .ptr2: dw 0x00
-        .n1: dw 0x00
-        .n2: dw 0x00
 %endif
