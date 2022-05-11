@@ -1,3 +1,4 @@
+        cmd_NULL: times 16 db 0x00
         cmd_time: db "time", 0x00
         cmd_date: db "date", 0x00
         cmd_clear: db "clear", 0x00
