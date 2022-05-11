@@ -2,6 +2,7 @@
 ; PRINTF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printf:
+	push si
 	mov di, si
 	xor ax, ax
 	xor cx, cx
@@ -73,5 +74,5 @@ printf:
 ; IF NULL TERMINATOR IS ENCOUNTERED
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .exit:
-	nop
+	pop si
 	ret

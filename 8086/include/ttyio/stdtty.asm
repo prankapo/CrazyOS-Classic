@@ -72,6 +72,7 @@ putchar:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 getline:
 	call flush
+	call conditional_scrollup
 	mov ax, GETLINE_BUFFER
 	add ax, 80
 	mov word [GETLINE_BUFFER_END], ax

@@ -10,6 +10,7 @@ strlen:
         cld
         repne scasb
         sub di, si
+        dec di
         xchg ax, di
         ret
 
@@ -20,27 +21,31 @@ strcmp:
         mov word [.p1], si
         mov word [.p2], di
         call strlen
-        mov word [.n1], ax
+        mov bx, ax
         mov si, word [.p2]
         call strlen
-        mov word [.n2], ax
-        cmp ax, word [.n1]
+        cmp ax, bx
         jne .false
-        mov cx, ax
+        mov al, 'T'
+        call putchar
+        mov cx, bx
         mov si, word [.p1]
         mov di, word [.p2]
         repe cmpsb
+        mov si, word [.p1]
+        mov di, word [.p2]
         cmp cx, 0x00
         je .true
 .false:
+        mov al, 'F'
+        call putchar
         mov ax, 0x01
         ret
-
 .true:
+        mov al, 'T'
+        call putchar
         mov ax, 0x00
         ret
         .p1: dw 0x00
         .p2: dw 0x00
-        .n1: dw 0x00
-        .n2: dw 0x00
 %endif

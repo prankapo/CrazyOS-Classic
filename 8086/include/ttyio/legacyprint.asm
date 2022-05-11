@@ -19,6 +19,7 @@ print:
 ; Basic hex printer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printhex:
+	push si
 	mov dx, ax
 	mov cx, 0x04
 .1:
@@ -47,6 +48,7 @@ printhex:
 	mov byte [si + 2], '0'
 	inc si
 	loop .5
+	pop si
 	ret
 	.hex_num: db "0x0000", 0x00
 
