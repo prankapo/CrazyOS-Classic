@@ -50,4 +50,4 @@ kernel_main:
 
 %include "include/ttyio/ttyio.asm"
 %include "include/cmos/clock.asm"
-%include "shell/shell.asm"
+%include "apps/shell/shell.asm"
