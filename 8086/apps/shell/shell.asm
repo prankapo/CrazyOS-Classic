@@ -5,6 +5,8 @@
 ; MAIN BODY OF THE SHELL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 main:
+        mov si, PROMPT
+        call printf
         call getline
         call cmd_lexer
         
@@ -40,7 +42,7 @@ main:
         call showdate
         jmp .return_point
 .cmd_clear:
-        ;call clear
+        call clear
         jmp .return_point
 .cmd_load:
         mov ax, 'L'
@@ -51,6 +53,7 @@ main:
         call flush                      ; flush the line
         jmp main
 
+        PROMPT: dw "> ", 0x00
         ERR_MSG: dw " has not been implemented\n", 0x00
 
 %include "apps/shell/lexer.asm"
