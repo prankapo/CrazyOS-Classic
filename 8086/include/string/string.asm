@@ -36,9 +36,12 @@ strcmp:
         je .true
 .false:
         mov ax, 0x01
-        ret
+        jmp .return_point
 .true:
         mov ax, 0x00
+.return_point:
+        mov si, word [.ptr1]
+        mov di, word [.ptr2]
         ret
         .ptr1: dw 0x00
         .ptr2: dw 0x00

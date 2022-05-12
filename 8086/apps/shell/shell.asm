@@ -16,23 +16,27 @@ main:
         cmp ax, 0x00
         je .cmd_time
         
-        lea si, [com]
         lea di, [cmd_date]
         call strcmp
         cmp ax, 0x00
         je .cmd_date
 
-        lea si, [com]
         lea di, [cmd_clear]
         call strcmp
         cmp ax, 0x00
         je .cmd_clear
 
-        lea si, [com]
         lea di, [cmd_load]
         call strcmp
         cmp ax, 0x00
         je .cmd_load
+        
+        mov al, 0x27            ; Executed when no match has been found
+        call putchar
+        lea si, [com]
+        call printf
+        lea si, [ERR_MSG]
+        call printf
         jmp .return_point
 
 .cmd_time:
@@ -54,7 +58,7 @@ main:
         jmp main
 
         PROMPT: dw "> ", 0x00
-        ERR_MSG: dw " has not been implemented\n", 0x00
+        ERR_MSG: dw "' has not been implemented\n", 0x00
 
 %include "apps/shell/lexer.asm"
 %include "apps/shell/cmdlist.asm"
