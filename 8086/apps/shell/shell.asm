@@ -30,6 +30,11 @@ main:
         call strcmp
         cmp ax, 0x00
         je .cmd_load
+
+        lea di, [cmd_shutdown]
+        call strcmp
+        cmp ax, 0x00
+        je .cmd_shutdown
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -52,7 +57,8 @@ main:
         mov ax, 'L'
         call putchar
         jmp .return_point
-
+.cmd_shutdown:
+        jmp .return_point
 .return_point:
         call flush                      ; flush the line
         jmp main
