@@ -47,9 +47,6 @@ The diagram below will make all this a bit easier to understand:
 		    <----------ax
 
 NOTE: Here output = return value of the function
-NOTE: Try not to load and print big strings using fstringdata and printf,
-respectively,  as that can mess things up. If you have to then use print, 
-printnl, printhex, and printdec.
 
 FUNCTION NAME: clear
 DESCRIPTION: Clears the screen
@@ -68,6 +65,11 @@ OUTPUT: Nothing
 
 FUNCTION NAME: printhex
 DESCRIPTION: Prints out a hexadecimal number in 0x0000 format
+INPUT: ax = Number to be printed
+OUTPUT: Nothing
+
+FUNCTION NAME: printdec
+DESCRIPTION: Prints out the decimal number stored in ax register
 INPUT: ax = Number to be printed
 OUTPUT: Nothing
 
