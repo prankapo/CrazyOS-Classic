@@ -1,3 +1,5 @@
+%ifndef CLOCK
+%define CLOCK
 bits 16
 align 16
 
@@ -96,3 +98,4 @@ date:
 	THU: dw "THU, ", 0x00
 	FRI: dw "FRI, ", 0x00
 	SAT: dw "SAT, ", 0x00
+%endif
