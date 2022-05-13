@@ -1,5 +1,5 @@
-%ifndef COMMAND_POWER
-%define COMMAND_POWER
+%ifndef COMMAND_APM
+%define COMMAND_APM
 apm_command:
         lea di, [.power_help]
         call strcmp
