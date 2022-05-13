@@ -70,7 +70,7 @@ main:
 %include "include/ttyio/ttyio.asm"
 %include "include/string/string.asm"
 %include "include/cmos/clock.asm"
-%include "include/apm/power.asm"
+%include "include/apm/command.asm"
 %include "apps/shell/lexer.asm"
 %include "apps/shell/cmdlist.asm"
 %endif
