@@ -33,6 +33,11 @@ strcmp:
         mov cx, bx
         repe cmpsb
         cmp cx, 0x00
+        jne .false
+        dec si
+        dec di
+        mov al, byte [si]
+        cmp al, byte [di]
         je .true
 .false:
         mov ax, 0x01
