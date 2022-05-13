@@ -232,7 +232,7 @@ conditional_scrollup:
 	mov ah, 0x02
 	mov bh, 0x00
 	mov dh, 22d
-	mov dl, 00d
+	mov dl, byte [findcursorposition.col]
 	int 0x10
 .1:
 	ret
