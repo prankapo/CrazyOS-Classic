@@ -22,12 +22,6 @@ apm_command:
         call APM_POWER_OFF_ROUTINE
         jmp .return_point
 ._power_level:
-        mov al, 0x04
-        xor bx, bx
-        call APM_SERVICE_ROUTINE
-        mov al, 0x01
-        xor bx, bx
-        call APM_SERVICE_ROUTINE
         call APM_POWER_LEVEL_ROUTINE
         mov ah, 0x00
         mov al, cl

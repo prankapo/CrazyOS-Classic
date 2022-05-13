@@ -101,27 +101,31 @@ APM_SERVICE_ROUTINE:
         .err_80: dw "No power management events pending\n", 0x00
         .err_86: dw "APM not present\n", 0x00
 
-APM_POWER_OFF_ROUTINE:
-        xor al, al
+APM_REAL_MODE_ENABLE:
+        xor al, al              ; Check whether APM is present or not
         xor bx, bx
         call APM_SERVICE_ROUTINE
-        mov al, 0x04
+        mov al, 0x04            ; Disconnect APM from every device
         xor bx, bx
         call APM_SERVICE_ROUTINE
-        mov al, 0x01
+        mov al, 0x01            ; Connect to the real mode interface
         xor bx, bx
         call APM_SERVICE_ROUTINE
-        mov al, 0x08
+        mov al, 0x08            ; Enable power management for all the devices
         mov bx, 0x01
         mov cx, 0x01
         call APM_SERVICE_ROUTINE
-        mov al, 0x07
+        ret
+APM_POWER_OFF_ROUTINE:
+        call APM_REAL_MODE_ENABLE
+        mov al, 0x07            ; Set the power state to OFF
         mov bx , 0x01
         mov cx, 0x03
         call APM_SERVICE_ROUTINE
         ret
 
 APM_POWER_LEVEL_ROUTINE:
+        call APM_REAL_MODE_ENABLE
         mov al, 0x0a
         mov bx, 0x8001
         call APM_SERVICE_ROUTINE
