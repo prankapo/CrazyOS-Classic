@@ -30,7 +30,7 @@ boot_main:
 	call print
 	call printnl
 
-	mov dx, 0x10		; number of sectors to read
+	mov dx, 0x20		; number of sectors to read
 	call read_disk
 	mov si, BOOT_MSG5
 	call print
