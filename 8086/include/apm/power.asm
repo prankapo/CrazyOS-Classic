@@ -23,14 +23,20 @@ apm_command:
         jmp .return_point
 ._power_level:
         call APM_POWER_LEVEL_ROUTINE
+        cmp cl, 0xff
+        je ._power_level_unknown
         mov ah, 0x00
         mov al, cl
-        call print8bitpackedBCD
+        call printdec
         mov al, '%'
         call putchar
         cmp bl, 0x03
         je ._charging
         lea si, [.msg_not_charging]
+        call printf
+        jmp .return_point
+._power_level_unknown:
+        lea si, [.msg_power_level_unknown]
         call printf
         jmp .return_point
 ._charging:
@@ -50,6 +56,7 @@ apm_command:
         .err_msg: dw "Invalid command\nType 'power -h' for help\n", 0x00
         .msg_charging: dw " Charging\n", 0x00
         .msg_not_charging: dw " Not charging\n", 0x00
+        .msg_power_level_unknown: dw "Power level unknown\n", 0x00
 %include "include/apm/apm.asm"
 %include "include/string/string.asm"
 %endif

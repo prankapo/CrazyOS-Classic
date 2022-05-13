@@ -127,7 +127,7 @@ APM_POWER_OFF_ROUTINE:
 APM_POWER_LEVEL_ROUTINE:
         call APM_REAL_MODE_ENABLE
         mov al, 0x0a
-        mov bx, 0x8001
+        mov bx, 0x0001
         call APM_SERVICE_ROUTINE
         ret
 %endif
