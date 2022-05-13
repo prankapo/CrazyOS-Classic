@@ -16,7 +16,7 @@ run: build
 		-device sb16\
 		-device adlib\
 		-device cirrus-vga\
-		-fda build/CrazyOS.img -fdb build/disk2.bin -boot order=a 
+		-fda build/CrazyOS.bin -fdb build/disk2.bin -boot order=a 
 
 ####################################################################################
 # Making Binaries

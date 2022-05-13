@@ -1,6 +1,10 @@
-%ifndef COMMAND_APM
-%define COMMAND_APM
-apm_command:
+%ifndef APM_COMMANDS
+%define APM_COMMANDS
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; POWER COMMAND PROCESSING
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+power_com:
         lea di, [.power_help]
         call strcmp
         cmp ax, 0x00
@@ -49,14 +53,16 @@ apm_command:
         jmp .return_point
 .return_point:
         ret
-        .power_off: db "-off", 0x00
-        .power_level: db "-level", 0x00
+        
+        .power_off: db "off", 0x00
+        .power_level: db "level", 0x00
         .power_help: db "-h", 0x00
-        .help_msg: dw "Options:\n-off: Shutsdown the system\n-level: Display the current power status of the system\n", 0x00
-        .err_msg: dw "Invalid command\nType 'power -h' for help\n", 0x00
+        .help_msg: dw "Options:\n\t1. off: Shutdown the system\n\t2. level: Display the current power status of the system\n", 0x00
+        .err_msg: dw "Invalid option\nType 'power -h' for help\n", 0x00
         .msg_charging: dw " Charging\n", 0x00
         .msg_not_charging: dw " Not charging\n", 0x00
         .msg_power_level_unknown: dw "Power level unknown\n", 0x00
+
 %include "include/apm/apm.asm"
 %include "include/string/string.asm"
 %endif

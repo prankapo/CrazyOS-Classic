@@ -12,6 +12,12 @@ INPUT: SI = Pointer to string 1
 OUTPUT: If AX = 0, then both the strings are equal
         Else if AX = 1, then the strings are not equal
 
+FUNCTION NAME: strcpy
+DESCRIPTION: Copies one string to another
+INPUT: SI = Pointer to string 1
+        DI = Pointer to string 2
+OUTPUT: Nothing
+
 FUNCTION NAME: atoi
 DESCRIPTION: Converts an integer string to an integer
 INPUT: SI = Pointer to string

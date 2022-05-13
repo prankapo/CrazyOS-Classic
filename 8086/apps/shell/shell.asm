@@ -8,6 +8,7 @@ main:
         mov si, PROMPT
         call printf
         call getline
+        mov al, ' '
         call cmd_lexer
         
         lea si, [com]
@@ -26,15 +27,15 @@ main:
         cmp ax, 0x00
         je .cmd_clear
 
-        lea di, [cmd_load]
-        call strcmp
-        cmp ax, 0x00
-        je .cmd_load
-
         lea di, [cmd_power]
         call strcmp
         cmp ax, 0x00
         je .cmd_power
+
+        lea di, [cmd_disk]
+        call strcmp
+        cmp ax, 0x00
+        je .cmd_disk
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -59,18 +60,23 @@ main:
         jmp .return_point
 .cmd_power:
         lea si, [arg1]
-        call apm_command
+        call power_com
+        jmp .return_point
+.cmd_disk:
+        lea si, [arg1]
+        call disk_com
         jmp .return_point
 .return_point:
         call flush                      ; flush the line
         jmp main
-
         PROMPT: dw "> ", 0x00
         ERR_MSG: dw "' has not been implemented\n", 0x00
+
 %include "include/ttyio/ttyio.asm"
 %include "include/string/string.asm"
-%include "include/cmos/command_cmos.asm"
-%include "include/apm/command_apm.asm"
-%include "apps/shell/lexer.asm"
+%include "include/string/lexer.asm"
 %include "apps/shell/cmdlist.asm"
+%include "include/cmos/cmos_com.asm"
+%include "include/apm/apm_com.asm"
+%include "include/disk/disk_com.asm"
 %endif

@@ -48,5 +48,5 @@ kernel_main:
 
 	.TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 %include "include/ttyio/ttyio.asm"
-%include "include/cmos/command_cmos.asm"
+%include "include/cmos/cmos_com.asm"
 %include "apps/shell/shell.asm"

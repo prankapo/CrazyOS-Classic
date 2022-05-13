@@ -1,5 +1,5 @@
-%ifndef COMMAND_CMOS
-%define COMMAND_CMOS
+%ifndef CMOS_COMMANDS
+%define CMOS_COMMANDS
 bits 16
 align 16
 

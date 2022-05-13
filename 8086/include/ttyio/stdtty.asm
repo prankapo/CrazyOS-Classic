@@ -188,7 +188,7 @@ getline:
 .UP:
 	jmp .get
 .return_point:
-	mov si, GETLINE_BUFFER
+	lea si, [GETLINE_BUFFER]
 	ret
 	GETLINE_BUFFER: times 80 db 0x00, 0x00
 	GETLINE_BUFFER_END: dw 0x00
