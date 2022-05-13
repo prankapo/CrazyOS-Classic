@@ -38,25 +38,15 @@ kernel_entry:
 
 kernel_main:
 	call clear
-	mov si, TEST_MSG
+	mov si, .TEST_MSG
 	call printf
 	call showdate
 	call showtime
-	lea si, [NUM]
-	call atoi
-        call printdec
-        call printnl
-	lea si, [HEX_NUM]
-	call atoh
-	call printhex
-	call printnl
 .while:
 	call main
 	jmp .while
 
-	TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
-	NUM: db "6553", 0x00
-	HEX_NUM: db "F", 0x00
+	.TEST_MSG: dw "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n", 0x00
 %include "include/ttyio/ttyio.asm"
 %include "include/cmos/clock.asm"
 %include "apps/shell/shell.asm"

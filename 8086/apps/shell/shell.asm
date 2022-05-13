@@ -31,10 +31,10 @@ main:
         cmp ax, 0x00
         je .cmd_load
 
-        lea di, [cmd_shutdown]
+        lea di, [cmd_power]
         call strcmp
         cmp ax, 0x00
-        je .cmd_shutdown
+        je .cmd_power
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -57,7 +57,9 @@ main:
         mov ax, 'L'
         call putchar
         jmp .return_point
-.cmd_shutdown:
+.cmd_power:
+        lea si, [arg1]
+        call apm_command
         jmp .return_point
 .return_point:
         call flush                      ; flush the line
@@ -65,9 +67,10 @@ main:
 
         PROMPT: dw "> ", 0x00
         ERR_MSG: dw "' has not been implemented\n", 0x00
-
-%include "apps/shell/lexer.asm"
-%include "apps/shell/cmdlist.asm"
 %include "include/ttyio/ttyio.asm"
 %include "include/string/string.asm"
+%include "include/cmos/clock.asm"
+%include "include/apm/power.asm"
+%include "apps/shell/lexer.asm"
+%include "apps/shell/cmdlist.asm"
 %endif
