@@ -1,5 +1,5 @@
-%ifndef CLOCK
-%define CLOCK
+%ifndef COMMAND_CLOCK
+%define COMMAND_CLOCK
 bits 16
 align 16
 

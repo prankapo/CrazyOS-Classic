@@ -69,8 +69,8 @@ main:
         ERR_MSG: dw "' has not been implemented\n", 0x00
 %include "include/ttyio/ttyio.asm"
 %include "include/string/string.asm"
-%include "include/cmos/clock.asm"
-%include "include/apm/command.asm"
+%include "include/cmos/command_cmos.asm"
+%include "include/apm/command_apm.asm"
 %include "apps/shell/lexer.asm"
 %include "apps/shell/cmdlist.asm"
 %endif
