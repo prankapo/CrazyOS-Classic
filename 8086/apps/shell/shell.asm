@@ -41,6 +41,11 @@ main:
         call strcmp
         cmp ax, 0x00
         je .cmd_run
+
+        lea di, [cmd_edit]
+        call strcmp
+        cmp ax, 0x00
+        je .cmd_edit
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -88,7 +93,10 @@ main:
         mov ax, cs              ; reset cs, ds, es
         mov ds, ax
         mov es, ax
-        
+        jmp .return_point
+.cmd_edit:
+        call edit_main
+        jmp .return_point
 .return_point:
         call flush                      ; flush the line
         jmp main
@@ -102,4 +110,5 @@ main:
 %include "include/cmos/cmos_com.asm"
 %include "include/apm/apm_com.asm"
 %include "include/disk/disk_com.asm"
+%include "apps/edit/edit.asm"
 %endif

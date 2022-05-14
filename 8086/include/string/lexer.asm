@@ -1,3 +1,9 @@
+%ifndef CMD_LEXER
+%define CMD_LEXER
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; COMMAND LEXER
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 cmd_lexer:
         mov byte [.separator], al
         mov cx, 80d
@@ -47,4 +53,6 @@ cmd_lexer:
         arg2: times 16 db 0x00
         arg3: times 16 db 0x00
         arg4: times 16 db 0x00
+
 %include "include/string/string.asm"
+%endif
