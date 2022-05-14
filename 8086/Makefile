@@ -6,7 +6,7 @@
 AS := nasm
 ASFLAGS := -f bin
 
-KEEP := build/disk2.bin
+KEEP := build/disk2.bin build/asm.bin
 
 ####################################################################################
 # Qemu

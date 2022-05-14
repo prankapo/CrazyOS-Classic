@@ -36,6 +36,11 @@ main:
         call strcmp
         cmp ax, 0x00
         je .cmd_disk
+
+        lea di, [cmd_run]
+        call strcmp
+        cmp ax, 0x00
+        je .cmd_run
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -66,6 +71,24 @@ main:
         lea si, [arg1]
         call disk_com
         jmp .return_point
+.cmd_run:
+        lea si, [arg1]
+        mov al, ':'
+        call cmd_lexer
+        
+        lea si, [com]
+        call atoh
+        push ax                 ; code segment
+        lea si, [arg1]
+        call atoh
+        push ax                 ; offset
+        mov bp, sp              ; sets up a new stack frame
+        call far [bp]           ; far call
+        add sp, 0x04            ; move sp up by 4 bytes
+        mov ax, cs              ; reset cs, ds, es
+        mov ds, ax
+        mov es, ax
+        
 .return_point:
         call flush                      ; flush the line
         jmp main
