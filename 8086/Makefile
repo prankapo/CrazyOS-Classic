@@ -16,6 +16,7 @@ run: build
 		-device sb16\
 		-device adlib\
 		-device cirrus-vga\
+		-soundhw pcspk\
 		-fda build/CrazyOS.bin -fdb build/disk2.bin -boot order=a 
 
 ####################################################################################
@@ -35,8 +36,10 @@ build/kernel.bin: kernel/kernel.asm\
 	$(wildcard apps/*/*.asm)
 	$(AS) $< $(ASFLAGS) -o $@
 
-build/disk2.bin: mkdisk2.asm
-	$(AS) $^ $(ASFLAGS) -o $@
+build/disk2.bin: mkdisk2.asm\
+	disk-apps/soundnlight.asm
+	$(AS) disk-apps/soundnlight.asm $(ASFLAGS) -o build/asm.bin
+	$(AS) $< $(ASFLAGS) -o $@
  
 ####################################################################################
 # Clean binaries and object files. Do before "gitting"
