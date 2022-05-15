@@ -46,6 +46,11 @@ main:
         call strcmp
         cmp ax, 0x00
         je .cmd_edit
+
+        lea di, [cmd_srng]
+        call strcmp
+        cmp ax, 0x00
+        je .cmd_srng
         
         mov al, 0x27            ; Executed when no match has been found
         call putchar
@@ -97,6 +102,11 @@ main:
 .cmd_edit:
         call edit_main
         jmp .return_point
+.cmd_srng:
+        call srng
+        call printdec
+        call printnl
+        jmp .return_point
 .return_point:
         call flush                      ; flush the line
         jmp main
@@ -110,5 +120,6 @@ main:
 %include "include/cmos/cmos_com.asm"
 %include "include/apm/apm_com.asm"
 %include "include/disk/disk_com.asm"
+%include "include/random/srng.asm"
 %include "apps/edit/edit.asm"
 %endif
