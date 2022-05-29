@@ -18,8 +18,8 @@ org 0x7c00
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; BOOT_MAIN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-boot_main: 
-	mov bp, 0x8000		; initialise bottom of the stack and stack pointer
+boot_main:
+	mov bp, 0x7ffe		; initialise bottom of the stack and stack pointer
 	mov sp, bp		; empty stack
 	
 	call clrscr		; clear screen
@@ -89,7 +89,7 @@ read_disk:
 	mov ah, 0x02		; read from the disk
 	mov al, dl		; number of sectors to read
 	mov ch, 0x00		; cylinder 0
-	mov cl, 0x02		; sector 3, because sector 1 is MBR
+	mov cl, 0x02		; sector 2, because sector 1 is MBR
 	mov dh, 0x00		; head 0
 	mov dl, [DRIVE_NUMBER]	; drive number
 	mov bx, [KERNEL_BASE]	; Segment base address for kernel

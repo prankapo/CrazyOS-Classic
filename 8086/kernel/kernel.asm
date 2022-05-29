@@ -33,7 +33,7 @@ kernel_entry:
 	mov es, ax
 	mov ax, 0x9000
 	mov ss, ax
-	mov bp, 0x9fff
+	mov bp, 0x9ffe
 	mov sp, bp
 
 kernel_main:
