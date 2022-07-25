@@ -1,1 +1,0 @@
-{"buildTargets":["all","binaries","boot.bin","clean","diskmaker.exe","diskmaker.o","doc_del","doc_dep","doc_run","doc_srun","doc_stop","include/clock.o","include/ttyio.o","kernel.bin","kernel/kernel.o","run","srun"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

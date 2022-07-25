@@ -1,0 +1,21 @@
+{
+    "workbench.colorTheme": "GitHub Light",
+    "editor.tabSize": 8,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": true,
+    "editor.wordWrap": "on",
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "none",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.quickSuggestions": {
+        "other": "off",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.fontFamily": "'Consolas', 'monospace', monospace",
+    "editor.fontWeight": "bold",
+    "extensions.ignoreRecommendations": true,
+    "editor.renderWhitespace": "all",
+    "update.mode": "none"
+}
