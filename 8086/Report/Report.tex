@@ -1,0 +1,376 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RRI template for TechDocs
+%
+% Original author:
+% Juan Tomas Sayago
+%
+
+% Instructions for using this template:
+% This title page compiles as is. If you wish to include this title page in 
+% another document, you will need to copy everything before 
+% \begin{document} into the preamble of your document. The title page is
+% then included using \titleAT within your document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+%extsizes support 8pt to 20pt
+\documentclass[12pt]{extreport}		
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hyperfootnotes=false]{hyperref}
+\usepackage{authblk}
+%\usepackage[]{mcode}
+\usepackage[paper=a4paper,top=25mm,bottom=25mm,right=25mm, left=25mm]{geometry}
+\usepackage{xcolor} 
+\usepackage{tocbibind}
+\usepackage{multicol}
+\usepackage{tabto}
+\usepackage[numbers]{natbib}
+\usepackage[symbol]{footmisc}
+\usepackage[toc,page]{appendix}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage[export]{adjustbox}[2011/08/13]
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{fancyvrb}
+\usepackage{forest}
+\usepackage{pdfpages}
+\usepackage{acronym}
+\usepackage{titlesec}
+%\usepackage{sectsty,lmodern}
+\usepackage{titletoc}
+%\usepackage{txfonts}
+%Times New Romans Font
+\usepackage{tgtermes}
+
+%Set size of chapter title, section title, subsection title
+\newcommand{\chapfnt}{\fontsize{16bp}{19}\selectfont}
+\newcommand{\secfnt}{\fontsize{14bp}{14}\selectfont}
+\newcommand{\ssecfnt}{\fontsize{12bp}{14}\selectfont}
+\titleformat{\chapter}[hang]
+{\vspace{-2.75cm}\centering\chapfnt\bfseries}{\MakeUppercase\chaptertitlename\ \thechapter:}{20pt}{\MakeUppercase}[{\vspace{0.5cm}\titlerule[1.75pt]\vspace{-0.2cm}}]
+
+%\titleformat{\chapter}[hang] 
+%{\vspace{-2.25cm}\centering\huge\bfseries{\MakeUppercase\chaptertitlename\ \thechapter:}{16pt}{\MakeUppercase}[{\titlerule[0.8pt]\vspace{-1cm}}]
+
+\titleformat{\section}
+{\normalfont\secfnt\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
+
+\titlespacing*{\chapter} {0pt}{50pt}{40pt}
+\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\AtBeginDocument{\renewcommand{\bibname}{References}}
+
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\lstset{basicstyle=\ttfamily,
+  mathescape=true,
+  escapeinside=||,
+  autogobble}
+
+\titlecontents{chapter}% <section-type>
+  [0pt]% <left>
+  {\bfseries}% <above-code>
+  {\chaptername\ \thecontentslabel:\quad}% <numbered-entry-format>
+  {}% <numberless-entry-format>
+  {\hfill\contentspage}% <filler-page-format>
+
+
+
+\newcommand*{\Doctitle}{Document Title} % Generic publisher logo
+\newcommand*{\Docstitle}{Document subtitle} % Generic publisher logo
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\title{\Doctitle} % Article title
+
+\date{}
+
+\newcommand*{\plogo}{Number} % Generic publisher logo
+\newcommand*{\keywords}{Regional economics; R1} % Generic publisher logo
+
+\renewenvironment{itemize}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{-1em}
+  }
+}{
+  \end{list}
+}
+
+\definecolor{wvublue}{HTML}{003366}
+\definecolor{wvugold}{HTML}{FFCC00}
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = Step \arabic*:}
+
+%----------------------------------------------------------------------------------------------------
+
+
+% ---------------------------------------------------------------------
+\RequirePackage{fancyhdr}  % Needed to define custom headers/footers
+\RequirePackage{lastpage}  % Number of pages in the document
+\pagestyle{fancy}          % Enables the custom headers/footers
+% Headers
+\lhead{}%
+\chead{}%
+\rhead{} %
+% Footers
+\lfoot{}%
+\cfoot{\thepage}%
+\rfoot{}%
+\renewcommand{\headrulewidth}{0pt}% % No header rule
+\renewcommand{\footrulewidth}{0pt}% % No footer rule
+% ---------------------------------------------------------------------
+
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\newcommand*{\titleRRITD}{\begingroup % Create the command for including the title page in the document
+\thispagestyle{empty}
+\centering % Center all text
+{\vspace{-2.75cm}\chapfnt\MakeUppercase{\textbf{CrazyOS: A Real Mode Operating System for\\[0.25\baselineskip]Educational Purposes}}}\\[1.0\baselineskip]
+{\textbf{MAJOR PROJECT REPORT\\[1.0\baselineskip]\textit{Submitted in partial fulfilment of the requirements for the award of the degree\\[0.5\baselineskip]of}}}\\[0.5\baselineskip]
+{\secfnt \textbf{\MakeUppercase{Bachelor of Technology}\\[0.5\baselineskip]\textit{\normalsize in}\\[0.5\baselineskip]\secfnt\MakeUppercase{Electrical \& Electronics Engineering}}}\\[0.5\baselineskip]
+{\textbf{\textit{\normalsize by}}}\\[0.5\baselineskip]
+\begin{multicols}{4}
+{\normalsize
+\centering{
+\textbf{Praneet Kapoor}\\
+\textbf{04115604918}\\
+\textbf{Rachit Jain}\\
+\textbf{04315604918}\\
+\textbf{Shristi Sharma}\\
+\textbf{05415604918}\\
+%\columnbreak
+\textbf{Sumit Gaur}\\
+\textbf{06115604918}\\}
+}
+\end{multicols}
+{\normalsize \textbf{\textit{Under the guidance\\of\\{Mr. Md. Saquib Faraz\\Assistant Professor}}}}
+%EEE department
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{0.5cm}
+\begin{figure}[h]
+\centering
+\protect\includegraphics[scale=1.5]{figures/logo-adgitm.eps}
+\end{figure}
+\vspace{0.5cm} % Whitespace between the title and short horizontal line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\makebox[\textwidth][c]{\MakeUppercase{\textbf{Department of Electrical \& Electronics Engineering}}}
+\newline
+\makebox[\textwidth][c]{\MakeUppercase{\textbf{Dr. Akhilesh Das Gupta Institute of Technology and Management}}}
+\newline
+\makebox[\textwidth][c]{\MakeUppercase{\textbf{(Affliated to Guru Gobind Singh Indraprastha University, Delhi)}}}
+\newline
+\makebox[\textwidth][c]{\MakeUppercase{\textbf{New Delhi - 110053}}}
+\newline
+\makebox[\textwidth][c]{\MakeUppercase{\textbf{June 2022}}}
+\end{center}
+\vfill % Whitespace between the author name and publisher text
+\endgroup}
+
+%----------------------------------------------------------------------------------------
+%	BLANK DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Adjust this to fix line spacing!!
+\linespread{1.25}\selectfont
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\titleRRITD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagenumbering{roman}
+\linespread{1.5}\selectfont
+\chapter*{\centering{CANDIDATES' DECLARATION}}
+\addcontentsline{toc}{chapter}{CANDIDATE'S DECLARATION}
+It is hereby certified that the work which is being presented in the B.Tech Major Project Report entitled \textbf{CrazyOS: A Real Mode Operating System for Educational Purposes} in partial fulfilment of the requirements for the award of the degree of \textbf{Bachelor of Technology} and submitted in the \textbf{Department of Electrical \& Electronics Engineering} of \textbf{Dr. Akhilesh Das Gupta Institute of Technology \& Management, New Delhi (Affiliated to Guru Gobind Singh Indraprastha University, Delhi)} is an authentic record of our own work carried out during the period from \textbf{February 2022 to June 2022} under the guidance of \textbf{Mr. Md. Saquib Faraz, Assistant Professor, EEE department}.\\[1.0\baselineskip]
+The matter presented in the B. Tech Major Project Report has not been submitted by us for the award of any other degree of this or any other Institute.\\[\baselineskip]
+\begin{multicols}{4}
+{\normalsize
+\centering{
+\textbf{Praneet Kapoor}\\
+\textbf{04115604918}\\
+\textbf{Rachit Jain}\\
+\textbf{04315604918}\\
+\textbf{Shristi Sharma}\\
+\textbf{05415604918}\\
+%\columnbreak
+\textbf{Sumit Gaur}\\
+\textbf{06115604918}\\}
+}
+\end{multicols}
+This is to certify that the above statement made by the candidates is correct to the best of our knowledge.\\[\baselineskip]
+\begin{multicols}{2}
+\centering
+{\hspace{-2.5cm}
+\textbf{Mr. Md. Saquib Faraz}\\
+\hspace{-2.5cm}
+\textbf{Assistant Professor}\\
+\columnbreak
+\centering\textbf{\hspace{2.5cm}Mr. Ajit Kumar Sharma\\\hspace{2.5cm}H.O.D., EEE Deptt.}\\
+}
+\end{multicols}
+The B. Tech. Major Project Viva-Voice Examination of Praneet Kapoor, Rachit Jain, Shristi Sharma, and Sumit Gaur has been held on\\[\baselineskip]
+\begin{multicols}{2}
+\centering\textbf{\hspace{-2.5cm}Dr. Amruta Pattnaik\\\hspace{-2.5cm}Project Coordinator}\\
+\columnbreak
+\centering\textbf{\hspace{1cm}(Signature of the External Examiner)}\\
+\end{multicols}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter*{\centering Abstract}
+\addcontentsline{toc}{chapter}{ABSTRACT}
+Technical education of undergraduate students should ensure that they are provided with practical knowledge which makes them fit for the ever changing industry. One of the ways of accomplishing this is by attempting to include project based learning alongside regular coursework. This project is a step towards this direction. We have presented a single-user, single-tasking, real mode operating system. The operating system comes with two applications, a shell and a line editor. A library of subroutines has also been created which includes custom implementation of getchar, putchar, printf, strlen, strcmp, strcpy and atoi in x86 assembly language. With only 1690 lines of code, the source code of the operating system can be easily understood by students and then used as a sandbox for learning about the design of the 8086 microprocessor and the original IBM PC.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter*{\centering Acknowledgements}
+\addcontentsline{toc}{chapter}{ACKNOWLEDGEMENTS}
+We express our deep gratitude to \textbf{Mr. Md. Saquib Faraz, Assistant Professor, Department of Electrical \& Electronics Engineering} for his valuable guidance and suggestions throughout our project work.\\
+We would like to extend our sincere thanks to \textbf{Mr. Ajit Kumar Sharma, Head of the Department, EEE} for his time to time suggestions to complete our project work. We are also thankful to \textbf{Prof. (Dr.) Sanjay Kumar, Director} for providing us the facilities to carry out our project work.\\
+We are thankful to  \textbf{Dr. Amruta Pattnaik, Project Coordinator} for her valuable guidance.\\[2.5\baselineskip]
+\begin{multicols}{4}
+{\normalsize
+\centering{
+\textbf{Praneet Kapoor}\\
+\textbf{04115604918}\\
+\textbf{Rachit Jain}\\
+\textbf{04315604918}\\
+\textbf{Shristi Sharma}\\
+\textbf{05415604918}\\
+%\columnbreak
+\textbf{Sumit Gaur}\\
+\textbf{06115604918}\\}
+}
+\end{multicols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*\contentsname{TABLE OF CONTENTS}
+\renewcommand*\listfigurename{LIST OF FIGURES} 
+\renewcommand*\listtablename{LIST OF TABLES} 
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+\chapter*{List of Abbreviations}
+\addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS}
+\begin{acronym}
+\acro{ACPI}{Advanced Configuration and Power Interface}
+\acro{AGC}{Apollo Guidance Computer}
+\acro{AICTE}{All India Council for Technical Education}
+\acro{ANSI}{American National Standards Institute}
+\acro{APM}{Advanced Power Management}
+\acro{ARM}{Advanced RISC Machines, originally Acorn RISC Machine}
+\acro{BDA}{BIOS Data Area}
+\acro{BIOS}{Basic Input/Output System}
+\acro{BIU}{Bus Interface Unit}
+\acro{CHS}{Cylinder-Head-Sector}
+\acro{CP/M}{Control Program/Monitor, later Control Program for Microcomputers}
+\acro{CPU}{Central Processing Unit}
+\acro{CTSS}{Compatible Time Sharing System}
+\acro{DEC}{Digital Equipment Corporation}
+\acro{DIP}{Dual Inline Package}
+\acro{DOS}{Disk Operating System}
+\acro{EBDA}{Extra BIOS Data Area}
+\acro{EDSAC}{Electronic Delay Storage Automatic Calculator}
+\acro{EDVAC}{Electronic Discrete Variable Automatic Computer}
+\acro{ENIAC}{Electronic Numerical Integrator and Comparator}
+\acro{EU}{Execution Unit}
+\acro{FAT}{File Allocation Table}
+\acro{GCC}{GNU Compiler Collection}
+\acro{GNU}{GNU is Not UNIX}
+\acro{IBM}{International Business Machines}
+\acro{IC}{Integrated Circuit}
+\acro{IT}{Information Technology}
+\acro{IVT}{Interrupt Vector Table}
+\acro{LCD}{Liquid Crystal Display}
+\acro{LMA}{Low Memory Area}
+\acro{MBR}{Master Boot Record}
+\acro{MINIX}{Mini-UNIX}
+\acro{MIT}{Massachusetts Institute of Technology}
+\acro{MULTICS}{MULTiplexed Information and Computation Service}
+\acro{NASA}{National Aeronautics and Space Administration}
+\acro{NASM}{Netwide ASseMbler}
+\acro{OEM}{Original Equipment Manufacturer}
+\acro{OS}{Operating System}
+\acro{PC}{Personal Computer}
+\acro{PCI}{Peripheral Component Interconnect}
+\acro{PDP}{Programmed Data Processor}
+\acro{PIC}{Programmable Interrupt Controller}
+\acro{PIT}{Programmable Interval Timer}
+\acro{RAM}{Random-Access Memory}
+\acro{RISC}{Reduced Instruction Set Computer}
+\acro{ROM}{Read-Only Memory}
+\acro{UEFI}{Unified Extensible Firmware Interface}
+\acro{UMA}{Upper Memory Area}
+\acro{UNIVAC}{Universal Automatic Computer}
+\end{acronym}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagenumbering{arabic}
+\linespread{1.5}\selectfont
+\input{ch1intro.tex}  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{ch3impos.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{ch4resndis.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{ch5concfut.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bibliographystyle{plainnat}
+\setcitestyle{numbers}
+\bibliography{REFERENCES}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter*{Research Paper}
+\addcontentsline{toc}{chapter}{Research Paper}
+\newpage
+\includepdf[pages={-}]{ResearchPaper.pdf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter*{Curriculum Vitae}
+\addcontentsline{toc}{chapter}{Curriculum Vitae}
+\newpage
+\includepdf[pages={1}]{praneet.pdf}
+\newpage
+\includepdf[pages={1}]{rachit.pdf}
+\newpage
+\includepdf[pages={1}]{shristi.pdf}
+\newpage
+\includepdf[pages={1}]{sumit.pdf}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

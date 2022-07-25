@@ -8,6 +8,15 @@
 *.img
 *.exe
 *.bak
+*.aux
+*.bbl
+*.blg
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.gz
 
 # folders to ignore
 cos/

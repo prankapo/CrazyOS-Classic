@@ -1,0 +1,13 @@
+\chapter{\centering Conclusion \& Future Scope}
+\section{Conclusion}
+We have successfully implemented a single-user, single-tasking, real-mode operating system named CrazyOS. The operating system comes with two applications: a shell and a line editor. Both of these applications have been demonstrated to work successfully. Various subroutines responsible for handling devices and for processing user commands form the library of the operating system. These library functions can be used to develop various disk applications which can then be run from the shell, as has been successfully demonstrated by running \texttt{soundnlight.asm} program.
+
+\section{Future Scope}
+The total lines of code which are there in the project directory can be computed with the help of \texttt{cloc} utility. It is revealed that there are in total 1718 lines of assembly code. If one excludes the number of lines of code in \texttt{soundnlight.asm} program, then the total lines of code for the project comes out to be 1690. Both of these numbers show that the operating system is small enough to be read, understood, used, and played by a student over the course of their undergraduate study. If it is incorporated correctly in courses related to computer architecture and x86 microprocessor family, this operating system can prove to be useful for disseminating practical knowledge of the aforementioned project.\\
+The project can be further expanded in the following ways:
+\begin{enumerate}
+  \item As an educational exercise, versions of CrazyOS working on computers using i386, x86-64, ARM and RISC-V processors can be developed.
+  \item Documentation related to each version of CrazyOS can be published online. This will help in increasing the number of people who learn from it.
+  \item A separate operating system can be developed for Raspberry Pi line of single board computers (SBC). These are easily and cheaply available all around the world. When playing with a toy operating system on a cheap SBC, the user will not have to worry about bricking their main computer. Furthermore, as RPis are increasingly being used in embedded systems, a lightweight operating system will prove to be a boon for embedded systems developers.
+\end{enumerate}
+We would conclude this report by quoting the words of Linus Torvalds and Terry Davis: This operating system has been developed because it was a fun challenge. Unlike Linux or Windows, it is not a professional operating system. In comparison to them, it is just a dirt-bike using which the user can go on accomplishing fun little challenges of their own liking. 
