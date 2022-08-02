@@ -17,16 +17,16 @@ run: build
 		-device adlib\
 		-device cirrus-vga\
 		-soundhw pcspk\
-		-fda build/CrazyOS.bin -fdb build/disk2.bin -boot order=a 
+		-fda build/CrazyOS-8086.bin -fdb build/disk2.bin -boot order=a 
 
 ####################################################################################
 # Making Binaries
 ####################################################################################
-build: build/CrazyOS.img build/disk2.bin
+build: build/CrazyOS-8086.img build/disk2.bin
 
-build/CrazyOS.img: mkdisk1.asm build/boot.bin build/kernel.bin
-	$(AS) $< $(ASFLAGS) -o build/CrazyOS.bin
-	cat build/CrazyOS.bin > build/CrazyOS.img
+build/CrazyOS-8086.img: mkdisk1.asm build/boot.bin build/kernel.bin
+	$(AS) $< $(ASFLAGS) -o build/CrazyOS-8086.bin
+	cat build/CrazyOS-8086.bin > build/CrazyOS-8086.img
 
 build/boot.bin: boot/boot.asm boot/boot_util.asm
 	$(AS) $< $(ASFLAGS) -o $@
