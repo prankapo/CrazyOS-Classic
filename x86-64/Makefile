@@ -30,7 +30,7 @@ run: all
 ###############################################################################
 all: $(OS-DISK) $(DATA-DISK)
 
-$(OS-DISK): make-os-disk.asm build/boot.bin build/mode-setup.bin
+$(OS-DISK): make-os-disk.asm build/boot.bin
 	$(AS) $< $(ASFLAG) -o $@
 
 $(DATA-DISK): make-data-disk.asm
@@ -42,10 +42,6 @@ $(DATA-DISK): make-data-disk.asm
 ###############################################################################
 build/boot.bin: boot/boot.asm\
 	$(filter-out boot/boot.asm, $(wildcard boot/*.asm))
-	$(AS) $< $(ASFLAGS) -o $@
-
-build/mode-setup.bin: mode-setup/mode-setup.asm\
-	$(filter-out mode-setup/mode-setup.asm, $(wildcard mode-setup/*.asm))
 	$(AS) $< $(ASFLAGS) -o $@
 
 
