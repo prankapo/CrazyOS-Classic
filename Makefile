@@ -49,3 +49,6 @@ build/disk2.bin: mkdisk2.asm\
 ####################################################################################
 clean: $(filter-out $(KEEP), $(wildcard build/*.bin)) $(wildcard build/*.img)
 	rm $^
+
+clean-all: build/
+	rm -rf $<
