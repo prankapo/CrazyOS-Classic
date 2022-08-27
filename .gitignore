@@ -17,6 +17,7 @@
 *.out
 *.toc
 *.gz
+*.html
 
 # folders to ignore
 cos/
