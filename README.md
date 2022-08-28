@@ -59,4 +59,6 @@ If you wish to make your own programs, use the library functions that I have pro
 In the end, I highly recommend that you go through [my major project report](Report/Report.pdf) to gain a better understanding of this project.  
 
 # You wanna say something?
-I would love to hear your opinions about this project, or your experience when playing with it. If you want to talk about this project, then send me a mail at kapoorpraneet2619@gmail.com.
+I would love to hear your opinions about this project, or your experience of playing with it. If you want to talk about this project, then send me a mail at kapoorpraneet2619@gmail.com.
+
+**Final version**
